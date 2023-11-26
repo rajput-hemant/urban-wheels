@@ -3,8 +3,8 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
 import { Icons } from "../icons";
-import { NewsletterSubscriptionForm } from "./newsletter-subscription-form";
-import { ThemeToggleGroup } from "./theme-toggle-group";
+import { NewsletterSubscriptionForm } from "../site-header/newsletter-subscription-form";
+import { ThemeToggleGroup } from "../site-header/theme-toggle-group";
 
 const footerLinks = [
   {
@@ -41,7 +41,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t py-10">
       <div className="mx-auto w-full max-w-none px-5 text-sm sm:max-w-[90%] sm:px-0 2xl:max-w-7xl">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] items-stretch justify-between gap-x-2 gap-y-10 sm:gap-x-6 md:flex md:flex-wrap">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] items-stretch justify-between gap-y-10 sm:gap-x-6 md:flex md:flex-wrap">
           <div className="col-span-full">
             <Link href="/" className="flex items-center font-semibold">
               <Icons.logo className="h-6" />
@@ -86,7 +86,7 @@ export function SiteFooter() {
               href={siteConfig.author.url}
               target="_blank"
               rel="noreferrer"
-              className="underline-offset-4 hover:underline"
+              className="underline underline-offset-4"
             >
               <strong>{githubUrl.split("/")[3]}</strong>
             </a>
@@ -95,7 +95,7 @@ export function SiteFooter() {
               href={githubUrl}
               target="_blank"
               rel="noreferrer"
-              className="underline-offset-4 hover:underline"
+              className="underline underline-offset-4"
             >
               <strong>GitHub</strong>
             </a>

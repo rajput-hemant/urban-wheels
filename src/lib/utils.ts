@@ -1,3 +1,4 @@
+import type { ReadonlyURLSearchParams } from "next/navigation";
 import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -41,4 +42,20 @@ export const setCSSVariable = (name: string, value: string) => {
   if (typeof window !== "undefined" && window?.document?.documentElement) {
     window.document.documentElement.style.setProperty(name, value);
   }
+};
+
+/**
+ * Creates a URL from the given pathname and params
+ * @param pathname The pathname to create the URL for
+ * @param params The params to create the URL for
+ * @returns The created URL
+ */
+export const createUrl = (
+  pathname: string,
+  params: URLSearchParams | ReadonlyURLSearchParams
+) => {
+  const paramsString = params.toString();
+  const queryString = `${paramsString.length ? "?" : ""}${paramsString}`;
+
+  return `${pathname}${queryString}`;
 };

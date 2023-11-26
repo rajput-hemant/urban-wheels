@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/lib/fonts";
 import { absoluteUrl, cn } from "@/lib/utils";
 import { Providers } from "@/components/providers";
-import { SiteFooter } from "@/components/site-header/footer";
+import { SiteFooter } from "@/components/site-footer/footer";
 import { SiteHeader } from "@/components/site-header/navbar";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 
