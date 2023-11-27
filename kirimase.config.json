@@ -1,0 +1,14 @@
+{
+  "hasSrc": true,
+  "packages": [
+    "drizzle",
+    "kinde"
+  ],
+  "preferredPackageManager": "bun",
+  "t3": false,
+  "alias": "@",
+  "rootPath": "src/",
+  "orm": "drizzle",
+  "componentLib": "shadcn-ui",
+  "auth": "kinde"
+}

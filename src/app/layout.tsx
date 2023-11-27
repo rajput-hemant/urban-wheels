@@ -62,10 +62,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(fontSans.variable, "scroll-smooth antialiased")}>
+      <body
+        className={cn(fontSans.variable, "scroll-smooth font-sans antialiased")}
+      >
         <Providers>
           <SiteHeader />
           <div className="min-h-screen pt-14">{children}</div>

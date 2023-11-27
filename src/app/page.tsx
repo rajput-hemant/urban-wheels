@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -15,16 +16,20 @@ import { Icons } from "@/components/icons";
 import { LogoSlider } from "@/components/logo-slider";
 import { SearchForm } from "@/components/search-form";
 import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import hatchback from "@/public/images/cars/body-styles/hatchback.avif";
-import minivan from "@/public/images/cars/body-styles/minivan.avif";
-import pickupTruck from "@/public/images/cars/body-styles/pickup-truck.avif";
-import sedan from "@/public/images/cars/body-styles/sedan.avif";
-import sportsCar from "@/public/images/cars/body-styles/sports-car.avif";
-import suv from "@/public/images/cars/body-styles/suv.avif";
+import {
+  hatchback,
+  minivan,
+  pickupTruck,
+  sedan,
+  sportsCar,
+  suv,
+} from "@/public/images/cars/body-styles";
+import { cancun, dubai, paris, rome } from "@/public/images/locations";
 
 const bodyStyles = [
   { slug: BodyStyle.HATCHBACK, name: "Hatchback", icon: Icons.hatchback },
@@ -54,7 +59,7 @@ const locations: Location[] = [
     value: "delhi",
     latitude: 28.6139,
     longitude: 77.209,
-    featured: true,
+    featured: false,
   },
   {
     id: "fae436f3-6341-486a-8691-0633f64e1997",
@@ -178,6 +183,7 @@ export default function Page() {
     <main>
       <Hero />
       <BodyStyleCarExplorer />
+      <DestinationCarExplorer />
       <Features />
       <Testimonials />
       <CarExplorer />
@@ -219,7 +225,7 @@ function Hero() {
 }
 
 function BodyStyleCarExplorer() {
-  const imageMap = {
+  const imageMap: { [key: string]: StaticImageData } = {
     hatchback: hatchback,
     minivan: minivan,
     "pickup-truck": pickupTruck,
@@ -281,6 +287,67 @@ function BodyStyleCarExplorer() {
             <ScrollBar orientation="horizontal" />
           </div>
         </ScrollArea>
+      </div>
+    </section>
+  );
+}
+
+async function DestinationCarExplorer() {
+  const imageMap: { [key: string]: StaticImageData } = {
+    paris: paris,
+    dubai: dubai,
+    cancun: cancun,
+    rome: rome,
+  };
+
+  const featuredLocations = locations.filter(({ featured }) => featured);
+
+  return (
+    <section className="pt-10">
+      <div className="container px-5 sm:px-0">
+        <h2 className="text-2xl font-bold">
+          Renting Trends: Must-Visit Places
+        </h2>
+        <p className="text-muted-foreground text-sm">
+          Explore our most popular destinations
+        </p>
+
+        <div className="mt-8 grid grid-cols-1 !grid-rows-1 items-center justify-between sm:grid-cols-2 md:grid-cols-4">
+          {featuredLocations.map(({ id, value, name }) => {
+            const imageUrl = imageMap[value];
+
+            return (
+              <Link
+                key={id}
+                href={{
+                  pathname: "/cars",
+                  query: { [SearchParams.LOCATION]: value },
+                }}
+                className="px-1.5 pb-4 pt-1"
+              >
+                <div className="group h-full w-full overflow-hidden rounded-2xl border">
+                  <AspectRatio ratio={16 / 9}>
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={name}
+                        fill
+                        className="h-full w-full object-cover object-center duration-300 group-hover:scale-105"
+                        placeholder="blur"
+                      />
+                    ) : (
+                      <Skeleton className="h-full w-full" />
+                    )}
+                  </AspectRatio>
+                </div>
+
+                <div className="ml-1 mt-3">
+                  <h3 className="text-sm font-semibold">{name}</h3>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -356,6 +423,7 @@ function Testimonials() {
                     width={40}
                     className="h-12 w-12 rounded-full border"
                   />
+
                   <div>
                     <p className="text-sm font-semibold">{name}</p>
                     <p className="text-muted-foreground text-sm">@{username}</p>
