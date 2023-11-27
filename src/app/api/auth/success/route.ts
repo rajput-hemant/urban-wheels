@@ -9,18 +9,21 @@ import { users } from "@/lib/db/schema/auth";
 export async function GET(req: NextRequest) {
   const user = await getUserAuth();
 
-  if (!user || user == null || !user.id)
-    throw new Error("something went wrong with authentication" + user);
+  // TODO: at build time, user is null
+  // if (!user || user == null || !user.id)
+  //   return NextResponse.redirect(new URL("/", req.nextUrl));
 
-  const [dbUser] = await db.select().from(users).where(eq(users.id, user.id));
+  if (user !== null && user.id) {
+    const [dbUser] = await db.select().from(users).where(eq(users.id, user.id));
 
-  if (!dbUser) {
-    await db.insert(users).values({
-      id: user.id,
-      name: user.name,
-      email: user.email!,
-      image: user.image,
-    });
+    if (!dbUser) {
+      await db.insert(users).values({
+        id: user.id,
+        name: user.name,
+        email: user.email!,
+        image: user.image,
+      });
+    }
   }
 
   return NextResponse.redirect(new URL("/", req.nextUrl));
