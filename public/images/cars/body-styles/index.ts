@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export {default as hatchback} from "./hatchback.avif";
 export {default as minivan} from "./minivan.avif";
 export {default as pickupTruck} from "./pickup-truck.avif";

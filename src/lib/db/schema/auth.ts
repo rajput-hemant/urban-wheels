@@ -1,6 +1,6 @@
 import { text } from "drizzle-orm/pg-core";
 
-import { createTable } from ".";
+import { createTable } from "../table-creator";
 
 export const users = createTable("user", {
   id: text("id").primaryKey().notNull(),
