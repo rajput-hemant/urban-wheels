@@ -7,6 +7,7 @@ import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer/footer";
 import { SiteHeader } from "@/components/site-header/navbar";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { Toaster } from "@/components/ui/toaster";
 
 import "@/styles/globals.css";
 
@@ -70,10 +71,11 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
       >
         <Providers>
           <SiteHeader />
-          <div className="min-h-screen pt-14">{children}</div>
+          <div className="min-h-[calc(100dvh-3rem)]">{children}</div>
           <SiteFooter />
         </Providers>
 
+        <Toaster />
         <TailwindIndicator />
       </body>
     </html>

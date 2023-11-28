@@ -46,12 +46,17 @@ const FormSchema = z
     path: ["checkout"],
   });
 
-type SearchFormProps = {
+type SearchFormProps = React.HTMLAttributes<HTMLFormElement> & {
   locations: Location[];
   compact?: boolean;
 };
 
-export function SearchForm({ locations, compact = false }: SearchFormProps) {
+export function SearchForm({
+  locations,
+  compact = false,
+  className,
+  ...props
+}: SearchFormProps) {
   const { push } = useRouter();
   const searchParams = useSearchParams();
 
@@ -102,8 +107,10 @@ export function SearchForm({ locations, compact = false }: SearchFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(
           "bg-background relative mx-auto grid grid-cols-[1.25fr_auto_1fr_auto_1fr_auto] items-center justify-between gap-x-2 whitespace-nowrap rounded-full border",
-          compact ? "h-14 w-[720px] px-2 py-1" : "h-[68px] w-[860px] px-3 py-2"
+          compact ? "h-14 w-[720px] px-2 py-1" : "h-[68px] w-[860px] px-3 py-2",
+          className
         )}
+        {...props}
       >
         <div className="relative">
           <FormField

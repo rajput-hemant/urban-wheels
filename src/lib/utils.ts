@@ -59,3 +59,18 @@ export const createUrl = (
 
   return `${pathname}${queryString}`;
 };
+
+/**
+ * Formats the given amount to the given currency
+ * @param amount The amount to format
+ * @param currency The currency to format the amount to
+ * @returns The formatted amount
+ */
+export const formatCurrency = (amount: number, currency: string = "USD") => {
+  return amount.toLocaleString("en-US", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+};
