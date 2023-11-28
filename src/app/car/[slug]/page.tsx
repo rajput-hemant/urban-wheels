@@ -1,17 +1,45 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Check, Gift, LifeBuoy, Map } from "lucide-react";
 
-import { cars, locations } from "@/lib/db/placeholder";
+import { fetchCarBySlug, fetchCars, fetchLocations } from "@/lib/db/queries";
 
 import { ReservationSidebar } from "./reservation-sidebar";
+
+export async function generateMetadata({
+  params,
+}: CarPageProps): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+
+  // fetch data
+  const car = await fetchCarBySlug(slug);
+
+  if (!car) {
+    return {};
+  }
+
+  return {
+    title: car.name,
+    description: car.descriptions[0],
+  };
+}
+
+export async function generateStaticParams() {
+  const cars = await fetchCars();
+  return cars.map((car) => ({ slug: car.slug }));
+}
 
 type CarPageProps = {
   params: { slug: string };
 };
 
-export default function CarDetailsPage({ params: { slug } }: CarPageProps) {
-  const car = cars.find((car) => car.slug === slug);
+export default async function CarDetailsPage({ params }: CarPageProps) {
+  const [car, locations] = await Promise.all([
+    fetchCarBySlug(params.slug),
+    fetchLocations(),
+  ]);
 
   if (!car) {
     notFound();

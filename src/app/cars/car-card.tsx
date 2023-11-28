@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Gauge, Star } from "lucide-react";
 
-import { cars } from "@/lib/db/placeholder";
+import { fetchCarBySlug } from "@/lib/db/queries";
 import { cn, formatCurrency } from "@/lib/utils";
 import {
   Card,
@@ -20,7 +20,7 @@ type CarCardProps = {
 };
 
 export async function CarCard({ index, slug }: CarCardProps) {
-  const car = cars.find((car) => car.slug === slug);
+  const car = await fetchCarBySlug(slug);
 
   if (!car) {
     return null;

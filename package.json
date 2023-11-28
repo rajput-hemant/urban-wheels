@@ -19,7 +19,8 @@
     "db:drop": "drizzle-kit drop",
     "db:studio": "drizzle-kit studio",
     "db:check": "drizzle-kit check:pg",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "seed": "bun src/lib/db/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",

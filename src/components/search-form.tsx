@@ -8,7 +8,7 @@ import { Check, Search } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import type { Location } from "@/types/location";
+import type { Location } from "@/lib/db/definitions";
 import { SearchParams } from "@/lib/enums";
 import { cn, createUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";

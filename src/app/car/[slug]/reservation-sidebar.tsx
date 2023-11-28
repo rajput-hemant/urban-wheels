@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 
-import type { Location } from "@/types/location";
+import type { Location } from "@/lib/db/definitions";
 import { formatCurrency } from "@/lib/utils";
 
 import { ReservationForm } from "./reservation-form";
@@ -8,7 +8,7 @@ import { ReservationForm } from "./reservation-form";
 type ReservationSidebarProps = {
   pricePerDay: number;
   currency: string;
-  rating: number;
+  rating: string;
   reviews: number;
   locations: Location[];
 };

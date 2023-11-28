@@ -66,10 +66,10 @@ export const createUrl = (
  * @param currency The currency to format the amount to
  * @returns The formatted amount
  */
-export const formatCurrency = (amount: number, currency: string = "USD") => {
+export const formatCurrency = (amount: number, currency: string | null) => {
   return amount.toLocaleString("en-US", {
     style: "currency",
-    currency,
+    currency: currency ?? "USD",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });

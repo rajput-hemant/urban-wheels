@@ -57,7 +57,7 @@ export function SearchFormSkeleton({
       </div>
 
       <Skeleton
-        className={cn("rounded-full", compact ? "h-9 w-9" : "h-12 w-12")}
+        className={cn("rounded-full", compact ? "h-10 w-10" : "h-12 w-12")}
       />
     </div>
   );

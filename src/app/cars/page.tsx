@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { FilterX } from "lucide-react";
 
-import { cars, locations } from "@/lib/db/placeholder";
+import { fetchCars, fetchLocations } from "@/lib/db/queries";
 import { SearchForm } from "@/components/search-form";
 import { CarCatalogSkeleton } from "@/components/skeletons/car-catalog-skeleton";
 import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
@@ -9,7 +9,9 @@ import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton"
 import { CarCard } from "./car-card";
 import { CarsFilters } from "./cars-filters";
 
-export default function CarsPage() {
+export default async function CarsPage() {
+  const [cars, locations] = await Promise.all([fetchCars(), fetchLocations()]);
+
   return (
     <>
       <div className="bg-background sticky inset-x-0 top-[57px] z-50 hidden h-16 items-center justify-start border-b pt-px lg:flex">

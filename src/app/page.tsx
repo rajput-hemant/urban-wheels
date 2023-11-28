@@ -10,8 +10,15 @@ import {
   Sparkle,
 } from "lucide-react";
 
-import { bodyStyles, locations, testimonials } from "@/lib/db/placeholder";
+import { bodyStyles } from "@/lib/db/placeholder";
+import {
+  fetchFeaturedLocations,
+  fetchLocations,
+  fetchTestimonials,
+  getMinPriceFromCars,
+} from "@/lib/db/queries";
 import { SearchParams } from "@/lib/enums";
+import { formatCurrency } from "@/lib/utils";
 import { LogoSlider } from "@/components/logo-slider";
 import { SearchForm } from "@/components/search-form";
 import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
@@ -30,7 +37,7 @@ import {
 } from "@/public/images/cars/body-styles";
 import { cancun, dubai, paris, rome } from "@/public/images/locations";
 
-export default function Page() {
+export default async function Page() {
   return (
     <main className="pt-14">
       <Hero />
@@ -43,7 +50,8 @@ export default function Page() {
   );
 }
 
-function Hero() {
+async function Hero() {
+  const locations = await fetchLocations();
   return (
     <section className="from-background to-muted via-muted border-b bg-gradient-to-b">
       <h1 className="from-foreground bg-gradient-to-t to-zinc-600 bg-clip-text text-center text-5xl font-bold text-transparent dark:bg-gradient-to-b">
@@ -152,54 +160,59 @@ async function DestinationCarExplorer() {
     rome: rome,
   };
 
-  const featuredLocations = locations.filter(({ featured }) => featured);
+  const currency = "INR";
+  const [featuredLocations, minPrice] = await Promise.all([
+    fetchFeaturedLocations(),
+    getMinPriceFromCars(),
+  ]);
 
   return (
-    <section className="pt-10">
-      <div className="container px-5 sm:px-0">
-        <h2 className="text-2xl font-bold">
-          Renting Trends: Must-Visit Places
-        </h2>
-        <p className="text-muted-foreground text-sm">
-          Explore our most popular destinations
-        </p>
+    <section className="container pt-10">
+      <h2 className="text-2xl font-bold">Renting Trends: Must-Visit Places</h2>
+      <p className="text-muted-foreground text-sm">
+        Explore our most popular destinations
+      </p>
 
-        <div className="mt-8 grid grid-cols-1 !grid-rows-1 items-center justify-between sm:grid-cols-2 md:grid-cols-4">
-          {featuredLocations.map(({ id, value, name }) => {
-            const imageUrl = imageMap[value];
+      <div className="mt-8 grid grid-cols-1 grid-rows-1 items-center justify-between sm:grid-cols-2 md:grid-cols-4">
+        {featuredLocations.map(({ id, value, name }) => {
+          const imageUrl = imageMap[value];
 
-            return (
-              <Link
-                key={id}
-                href={{
-                  pathname: "/cars",
-                  query: { [SearchParams.LOCATION]: value },
-                }}
-                className="px-1.5 pb-4 pt-1"
-              >
-                <div className="group h-full w-full overflow-hidden rounded-2xl border">
-                  <AspectRatio ratio={16 / 9}>
-                    {imageUrl ? (
-                      <Image
-                        src={imageUrl}
-                        alt={name}
-                        fill
-                        className="h-full w-full object-cover object-center duration-300 group-hover:scale-105"
-                        placeholder="blur"
-                      />
-                    ) : (
-                      <Skeleton className="h-full w-full" />
-                    )}
-                  </AspectRatio>
-                </div>
+          return (
+            <Link
+              key={id}
+              href={{
+                pathname: "/cars",
+                query: { [SearchParams.LOCATION]: value },
+              }}
+              className="px-1.5 pb-4 pt-1"
+            >
+              <div className="group h-full w-full overflow-hidden rounded-2xl border">
+                <AspectRatio ratio={16 / 9}>
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt={name}
+                      fill
+                      className="h-full w-full object-cover object-center duration-300 group-hover:scale-105"
+                      placeholder="blur"
+                    />
+                  ) : (
+                    <Skeleton className="h-full w-full" />
+                  )}
+                </AspectRatio>
+              </div>
 
-                <div className="ml-1 mt-3">
-                  <h3 className="text-sm font-semibold">{name}</h3>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+              <div className="ml-1 mt-3">
+                <h3 className="text-sm font-semibold">{name}</h3>
+                {minPrice && (
+                  <p className="text-muted-foreground mt-1 text-sm">
+                    Cars from {formatCurrency(minPrice, currency)}+
+                  </p>
+                )}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
@@ -254,7 +267,9 @@ function Features() {
   );
 }
 
-function Testimonials() {
+async function Testimonials() {
+  const testimonials = await fetchTestimonials();
+
   return (
     <section className="border-t py-12">
       <div className="container">
