@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site";
 import { Icons } from "../icons";
 import { NewsletterSubscriptionForm } from "../site-header/newsletter-subscription-form";
 import { ThemeToggleGroup } from "../site-header/theme-toggle-group";
+import { Separator } from "../ui/separator";
 
 const footerLinks = [
   {
@@ -79,30 +80,37 @@ export function SiteFooter() {
             <NewsletterSubscriptionForm />
           </div>
         </div>
-        <div className="mt-14 flex items-center justify-between lg:mt-16">
-          <p className="text-sm">
-            Built by{" "}
-            <a
-              href={siteConfig.author.url}
-              target="_blank"
-              rel="noreferrer"
-              className="underline underline-offset-4"
-            >
-              <strong>{githubUrl.split("/")[3]}</strong>
-            </a>
-            . The source code is available on{" "}
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="underline underline-offset-4"
-            >
-              <strong>GitHub</strong>
-            </a>
-            .
-          </p>
 
-          <ThemeToggleGroup className="hidden md:flex" />
+        <div className="mt-8 flex items-center justify-between lg:mt-12">
+          <div className="text-muted-foreground flex flex-col">
+            <p className="">
+              &copy; {new Date().getFullYear()} {siteConfig.name}.
+            </p>
+
+            <div className="mt-4 hidden gap-3 md:flex">
+              <a
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-foreground duration-200"
+              >
+                <Icons.gitHub className="h-4 w-4 shrink-0" />
+              </a>
+
+              <Separator orientation="vertical" className="h-4" />
+
+              <a
+                href={siteConfig.links.x}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-foreground duration-200"
+              >
+                <Icons.x className="h-4 w-4 shrink-0" />
+              </a>
+            </div>
+          </div>
+
+          <ThemeToggleGroup />
         </div>
       </div>
     </footer>

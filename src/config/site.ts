@@ -13,8 +13,8 @@ export const siteConfig = {
 
   links: {
     github: "https://github.com/rajput-hemant/urban-wheels",
-    twitter: "https://twitter.com/rajput_hemant01",
     discord: "https://discord.gg/rajput-hemant#8269",
+    x: "https://twitter.com/rajput_hemant01",
   },
 };
 

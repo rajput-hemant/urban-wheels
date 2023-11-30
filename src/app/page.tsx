@@ -10,6 +10,7 @@ import {
   Sparkle,
 } from "lucide-react";
 
+import { siteConfig } from "@/config/site";
 import { bodyStyles } from "@/lib/db/placeholder";
 import {
   fetchFeaturedLocations,
@@ -18,7 +19,8 @@ import {
   getMinPriceFromCars,
 } from "@/lib/db/queries";
 import { SearchParams } from "@/lib/enums";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, getGitHubStars } from "@/lib/utils";
+import { Icons } from "@/components/icons";
 import { LogoSlider } from "@/components/logo-slider";
 import { SearchForm } from "@/components/search-form";
 import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
@@ -39,13 +41,14 @@ import { cancun, dubai, paris, rome } from "@/public/images/locations";
 
 export default async function Page() {
   return (
-    <main className="pt-14">
+    <main className="pt-7 md:pt-14">
       <Hero />
       <BodyStyleCarExplorer />
       <DestinationCarExplorer />
       <Features />
       <Testimonials />
       <CarExplorer />
+      <OpenSource />
     </main>
   );
 }
@@ -54,7 +57,7 @@ async function Hero() {
   const locations = await fetchLocations();
   return (
     <section className="from-background to-muted via-muted border-b bg-gradient-to-b">
-      <h1 className="from-foreground bg-gradient-to-t to-zinc-600 bg-clip-text text-center text-5xl font-bold text-transparent dark:bg-gradient-to-b">
+      <h1 className="from-foreground font-heading bg-gradient-to-t to-zinc-600 bg-clip-text text-center text-5xl text-transparent dark:bg-gradient-to-b xl:text-6xl">
         Find your car
       </h1>
 
@@ -77,7 +80,7 @@ async function Hero() {
           <SearchForm locations={locations} />
         </Suspense>
       </div>
-      <div className="mt-14 overflow-x-hidden">
+      <div className="overflow-x-hidden md:mt-14">
         <LogoSlider />
       </div>
     </section>
@@ -96,7 +99,7 @@ function BodyStyleCarExplorer() {
 
   return (
     <section className="container pt-10">
-      <h2 className="text-2xl font-bold">Popular Rental Car Choices</h2>
+      <h2 className="font-heading text-2xl">Popular Rental Car Choices</h2>
       <p className="text-muted-foreground text-sm">
         Choose from a wide variety of vehicles
       </p>
@@ -168,7 +171,9 @@ async function DestinationCarExplorer() {
 
   return (
     <section className="container pt-10">
-      <h2 className="text-2xl font-bold">Renting Trends: Must-Visit Places</h2>
+      <h2 className="font-heading text-2xl">
+        Renting Trends: Must-Visit Places
+      </h2>
       <p className="text-muted-foreground text-sm">
         Explore our most popular destinations
       </p>
@@ -222,7 +227,7 @@ function Features() {
   return (
     <section className="bg-muted mt-10 border-t">
       <div className="mx-auto max-w-none px-5 py-14 sm:max-w-[90%] sm:px-0 lg:max-w-4xl">
-        <h2 className="text-center text-2xl font-bold">
+        <h2 className="font-heading text-center text-2xl">
           Discover Why We Stand Out
         </h2>
 
@@ -273,7 +278,9 @@ async function Testimonials() {
   return (
     <section className="border-t py-12">
       <div className="container">
-        <h2 className="text-center text-2xl font-bold">Driven by Feedback</h2>
+        <h2 className="font-heading text-center text-2xl">
+          Driven by Feedback
+        </h2>
         <div className="mt-4 columns-1 sm:columns-2 lg:columns-4">
           {testimonials.map(({ id, name, username, comment, image_url }) => (
             <div key={id} className="pt-4">
@@ -307,15 +314,15 @@ async function Testimonials() {
 
 function CarExplorer() {
   return (
-    <section className="border-t py-16">
+    <section className="border-y py-8 md:py-24">
       <div className="container">
         <div className="flex flex-col items-start justify-between gap-x-6 gap-y-9 md:flex-row md:items-center">
-          <h2 className="text-center text-2xl font-bold leading-9">
+          <h2 className="font-heading w-full text-center text-2xl leading-9 md:w-fit">
             <p>Your Journey Begins Here.</p>
             <p>Dive into Endless Possibilities!</p>
           </h2>
 
-          <Button size="lg" className="group mx-auto md:mx-0" asChild>
+          <Button size="lg" className="group mx-auto shadow-md md:mx-0" asChild>
             <Link
               href="/cars"
               className="flex items-center justify-center gap-x-2 font-semibold"
@@ -325,6 +332,54 @@ function CarExplorer() {
             </Link>
           </Button>
         </div>
+      </div>
+    </section>
+  );
+}
+
+async function OpenSource() {
+  const stars = await getGitHubStars();
+
+  return (
+    <section className="bg-muted py-8 md:py-12">
+      <div className="container flex flex-col items-center justify-center gap-4 text-center">
+        <h2 className="text-3xl font-semibold sm:text-4xl">
+          Proudly Open Source
+        </h2>
+
+        <p className="text-muted-foreground max-w-[85%] sm:text-lg">
+          {siteConfig.name} is open source and powered by open source software.{" "}
+          <br /> The code is available on{" "}
+          <Link
+            href={siteConfig.links.github}
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-foreground underline underline-offset-4 duration-200"
+          >
+            GitHub
+          </Link>
+          .
+        </p>
+
+        {stars && (
+          <Link
+            href={siteConfig.links.github}
+            target="_blank"
+            rel="noreferrer"
+            className="flex"
+          >
+            <div className="bg-foreground flex h-10 w-10 items-center justify-center rounded-md shadow-md hover:shadow-lg">
+              <Icons.gitHub className="text-background h-6 w-6" />
+            </div>
+
+            <div className="flex items-center">
+              <div className="border-foreground h-4 w-4 border-y-8 border-r-8 border-y-transparent" />
+              <div className="border-foreground bg-foreground text-background flex h-10 items-center rounded-md border px-4 font-medium shadow-md hover:shadow-lg">
+                {stars} stars on GitHub
+              </div>
+            </div>
+          </Link>
+        )}
       </div>
     </section>
   );

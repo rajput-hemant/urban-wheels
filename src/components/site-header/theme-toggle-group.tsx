@@ -4,6 +4,7 @@ import React from "react";
 import { Monitor, Moon, SunMedium } from "lucide-react";
 import { useTheme } from "next-themes";
 
+import { cn } from "@/lib/utils";
 import { useIsMounted } from "@/hooks/use-is-mouted";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
@@ -24,33 +25,30 @@ export function ThemeToggleGroup({ className }: ThemeToggleGroupProps) {
       type="single"
       value={isMounted() ? theme : "system"}
       onValueChange={handleThemeChange}
-      className={className}
+      className={cn("rounded-full border p-1", className)}
     >
       <ToggleGroupItem
-        aria-label="Toggle Dark Mode"
-        size="sm"
-        value="dark"
-        className="px-2"
-      >
-        <Moon className="h-5" />
-      </ToggleGroupItem>
-
-      <ToggleGroupItem
         aria-label="Toggle Light Mode"
-        size="sm"
         value="light"
-        className="px-2"
+        className="h-8 w-8 rounded-full px-2"
       >
-        <SunMedium className="h-5" />
+        <SunMedium className="h-4" />
       </ToggleGroupItem>
 
       <ToggleGroupItem
         aria-label="Toggle System Mode"
-        size="sm"
         value="system"
-        className="px-2"
+        className="h-8 w-8 rounded-full px-2"
       >
-        <Monitor className="h-5" />
+        <Monitor className="h-4" />
+      </ToggleGroupItem>
+
+      <ToggleGroupItem
+        aria-label="Toggle Dark Mode"
+        value="dark"
+        className="h-8 w-8 rounded-full px-2"
+      >
+        <Moon className="h-4" />
       </ToggleGroupItem>
     </ToggleGroup>
   );

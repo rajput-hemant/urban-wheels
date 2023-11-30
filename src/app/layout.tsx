@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/lib/fonts";
+import { fontHeading, fontSans } from "@/lib/fonts";
 import { absoluteUrl, cn } from "@/lib/utils";
 import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer/footer";
@@ -67,7 +67,11 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(fontSans.variable, "scroll-smooth font-sans antialiased")}
+        className={cn(
+          fontSans.variable,
+          fontHeading.variable,
+          "scroll-smooth font-sans antialiased"
+        )}
       >
         <Providers>
           <SiteHeader />

@@ -7,13 +7,13 @@ import { fetchCarBySlug, fetchCars, fetchLocations } from "@/lib/db/queries";
 
 import { ReservationSidebar } from "./reservation-sidebar";
 
-export async function generateMetadata({
-  params,
-}: CarPageProps): Promise<Metadata> {
-  // read route params
-  const slug = params.slug;
+type CarPageProps = {
+  params: { slug: string };
+};
 
-  // fetch data
+export async function generateMetadata({
+  params: { slug },
+}: CarPageProps): Promise<Metadata> {
   const car = await fetchCarBySlug(slug);
 
   if (!car) {
@@ -28,12 +28,8 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const cars = await fetchCars();
-  return cars.map((car) => ({ slug: car.slug }));
+  return cars.map(({ slug }) => ({ slug }));
 }
-
-type CarPageProps = {
-  params: { slug: string };
-};
 
 export default async function CarDetailsPage({ params }: CarPageProps) {
   const [car, locations] = await Promise.all([
@@ -51,7 +47,7 @@ export default async function CarDetailsPage({ params }: CarPageProps) {
         <div className="p-6 px-0 pb-0 md:pb-0 md:pr-6">
           <div className="grid grid-cols-[1fr_auto] justify-between">
             <div className="flex flex-col">
-              <h1 className="text-xl font-bold">{car.name}</h1>
+              <h1 className="font-heading text-2xl md:text-3xl">{car.name}</h1>
 
               <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-1.5 text-sm lg:text-base">
                 <span>{car.seats} seats</span>

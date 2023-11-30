@@ -40,7 +40,7 @@ export function NewsletterSubscriptionForm() {
           type="email"
           required
           aria-describedby="email-validation"
-          className="transition-shadow duration-200 hover:shadow"
+          className="pr-[100px] transition-shadow duration-200 hover:shadow"
         />
 
         <SubmitButton />

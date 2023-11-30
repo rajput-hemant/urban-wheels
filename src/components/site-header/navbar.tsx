@@ -40,14 +40,19 @@ export async function SiteHeader() {
             <>
               <RegisterLink
                 className={cn(
-                  buttonVariants({ variant: "outline" }),
+                  buttonVariants({ size: "sm", variant: "outline" }),
                   "hidden sm:flex"
                 )}
               >
                 Register
               </RegisterLink>
 
-              <LoginLink className={cn(buttonVariants(), "rounded-full px-6")}>
+              <LoginLink
+                className={cn(
+                  buttonVariants({ size: "sm" }),
+                  "rounded-full px-6"
+                )}
+              >
                 Login
               </LoginLink>
             </>

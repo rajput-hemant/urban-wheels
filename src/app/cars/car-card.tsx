@@ -100,7 +100,7 @@ export async function CarCard({ index, slug }: CarCardProps) {
               <span className="font-semibold">
                 {formatCurrency(
                   discounted_price_per_day,
-                  discounted_price_currency
+                  discounted_price_currency!
                 )}
               </span>
             </>

@@ -1,4 +1,5 @@
 import { Inter, Overpass, Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
@@ -34,5 +35,10 @@ export const overpass = Overpass({
 /* -----------------------------------------------------------------------------------------------
  * Local Fonts
  * -----------------------------------------------------------------------------------------------*/
+
+export const fontHeading = localFont({
+  src: "../../public/fonts/CalSans-SemiBold.woff",
+  variable: "--font-heading",
+});
 
 // ...
