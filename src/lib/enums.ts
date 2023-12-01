@@ -18,3 +18,14 @@ export enum BodyStyle {
   HATCHBACK = "hatchback",
   SEDAN = "sedan",
 }
+
+export enum EngineType {
+  GAS = "gas",
+  HYBRID = "hybrid",
+  ELECTRIC = "electric",
+}
+
+export enum Transmission {
+  AUTOMATIC = "automatic",
+  MANUAL = "manual",
+}

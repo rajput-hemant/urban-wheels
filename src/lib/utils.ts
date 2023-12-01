@@ -108,3 +108,22 @@ export async function getGitHubStars(): Promise<string | null> {
     return null;
   }
 }
+
+/**
+ * Converts a string into a slug by replacing spaces with hyphens,
+ * removing non-alphanumeric characters, trimming leading and trailing hyphens,
+ * and converting the string to lowercase.
+ *
+ * @param str - The string to be slugified.
+ * @returns The slugified string.
+ */
+export function slugify(str: string) {
+  return str
+    .replace(/\s+/g, "-") // replace spaces with hyphens
+    .replace(/[^a-z0-9-]/g, "") // remove any non-alphanumeric characters
+    .replace(/-+/g, "-") // remove consecutive hyphens
+    .replace(/^-+/, "") // trim leading hyphens
+    .replace(/-+$/, "") // trim trailing hyphens
+    .toLowerCase()
+    .trim(); // convert string to lowercase
+}

@@ -42,7 +42,7 @@ export async function CarCard({ index, slug }: CarCardProps) {
   } = car;
 
   return (
-    <Card className="duration-300 hover:scale-105 hover:shadow-xl">
+    <Card className="transition-shadow duration-300 hover:shadow-xl">
       <CardHeader>
         <div className="flex items-baseline justify-between gap-x-2 whitespace-nowrap">
           <CardTitle className="inline-block truncate text-left text-sm font-semibold">

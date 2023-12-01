@@ -1,6 +1,3 @@
-import { BodyStyle } from "@/lib/enums";
-import { Icons } from "@/components/icons";
-
 import type {
   Car,
   Location,
@@ -16,19 +13,6 @@ const users = [
     email: "user@carhive.com",
     password: "123456",
   },
-];
-
-export const bodyStyles = [
-  { slug: BodyStyle.HATCHBACK, name: "Hatchback", icon: Icons.hatchback },
-  { slug: BodyStyle.MINIVAN, name: "Minivan", icon: Icons.minivan },
-  {
-    slug: BodyStyle.PICKUP_TRUCK,
-    name: "Pickup Truck",
-    icon: Icons.pickupTruck,
-  },
-  { slug: BodyStyle.SPORTS_CAR, name: "Sports Car", icon: Icons.sportsCar },
-  { slug: BodyStyle.SUV, name: "SUV", icon: Icons.suv },
-  { slug: BodyStyle.SEDAN, name: "Sedan", icon: Icons.sedan },
 ];
 
 export const locations: Location[] = [

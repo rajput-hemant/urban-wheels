@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
-import { bodyStyles } from "@/lib/db/placeholder";
 import {
   fetchFeaturedLocations,
   fetchLocations,
@@ -38,6 +37,7 @@ import {
   suv,
 } from "@/public/images/cars/body-styles";
 import { cancun, dubai, paris, rome } from "@/public/images/locations";
+import { bodyStyles } from "./cars/filters/body-styles";
 
 export default async function Page() {
   return (
@@ -341,7 +341,7 @@ async function OpenSource() {
   const stars = await getGitHubStars();
 
   return (
-    <section className="bg-muted py-8 md:py-12">
+    <section className="bg-muted py-8 md:py-12 xl:py-16">
       <div className="container flex flex-col items-center justify-center gap-4 text-center">
         <h2 className="text-3xl font-semibold sm:text-4xl">
           Proudly Open Source
