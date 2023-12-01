@@ -4,6 +4,7 @@ import { FilterX } from "lucide-react";
 import { fetchCars, fetchLocations } from "@/lib/db/queries";
 import { SearchParams } from "@/lib/enums";
 import { slugify } from "@/lib/utils";
+import { MapContainer } from "@/components/map-container";
 import { SearchForm } from "@/components/search-form";
 import { CarCatalogSkeleton } from "@/components/skeletons/car-catalog-skeleton";
 import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
@@ -44,14 +45,14 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
     filteredCars = filteredCars.filter((car) => {
       const currentPrice =
         car.discounted_price_per_day || car.retail_price_per_day;
-      return currentPrice >= Number(minPrice);
+      return currentPrice >= +minPrice;
     });
   }
   if (maxPrice) {
     filteredCars = filteredCars.filter((car) => {
       const currentPrice =
         car.discounted_price_per_day || car.retail_price_per_day;
-      return currentPrice <= Number(maxPrice);
+      return currentPrice <= +maxPrice;
     });
   }
   if (bodyStyles) {
@@ -70,14 +71,12 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
     );
   }
   if (minSeats) {
-    filteredCars = filteredCars.filter(
-      ({ seats }) => seats >= Number(minSeats)
-    );
+    filteredCars = filteredCars.filter(({ seats }) => seats >= +minSeats);
   }
 
   return (
     <>
-      <div className="bg-background sticky inset-x-0 top-[57px] z-50 hidden h-16 items-center justify-start border-b pt-px lg:flex">
+      <div className="bg-background sticky inset-x-0 top-[57px] z-50 hidden h-16 items-center justify-start pt-px lg:flex">
         <div className="mx-auto w-full max-w-none px-5 sm:max-w-none sm:px-6">
           <div className="flex items-center justify-between">
             <p className="text-lg font-semibold">
@@ -98,12 +97,12 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
         </div>
       </div>
 
-      <div className="relative flex lg:h-[calc(100dvh-8rem)]">
+      <div className="relative flex lg:min-h-[calc(100dvh-8rem)]">
         <div className="w-full overflow-y-auto lg:w-[55%] xl:w-[63%]">
           <Suspense fallback={<CarCatalogSkeleton />}>
-            <div className="px-5 py-8 sm:px-6 lg:pb-4 lg:pt-8">
+            <div className="px-5 py-4 sm:px-2 lg:py-0">
               {filteredCars.length ? (
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] justify-center gap-6">
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] justify-center gap-3">
                   {filteredCars.map(({ id, slug }, index) => (
                     <CarCard key={id} index={index} slug={slug} />
                   ))}
@@ -123,9 +122,9 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
           </Suspense>
         </div>
 
-        <div className="hidden h-[calc(100dvh-8rem)] flex-auto pb-4 pr-5 pt-8 lg:block">
-          <div className="flex h-full items-center justify-center rounded-md border-2 border-dashed text-2xl">
-            Map Goes here
+        <div className="hidden flex-auto lg:block">
+          <div className="sticky top-[calc(7.5rem+1px)] mb-4 mr-2 flex min-h-[calc(100dvh-8rem)] overflow-hidden rounded-md border">
+            <MapContainer />
           </div>
         </div>
       </div>
