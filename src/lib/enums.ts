@@ -11,10 +11,21 @@ export enum SearchParams {
 }
 
 export enum BodyStyle {
-  SUV = "suv",
+  SUV = "Suv",
   MINIVAN = "minivan",
   JEEP = "jeep",
   KWID = "kwid",
   HYUNDAI = "hyundai",
   TOYOTA = "toyota",
+}
+
+export enum EngineType {
+  GAS = "gas",
+  HYBRID = "hybrid",
+  ELECTRIC = "electric",
+}
+
+export enum Transmission {
+  AUTOMATIC = "automatic",
+  MANUAL = "manual",
 }

@@ -21,7 +21,7 @@ export function ReservationSidebar({
   locations,
 }: ReservationSidebarProps) {
   return (
-    <div className="hidden normal-nums lg:block">
+    <div className="hidden min-h-[calc(100vh-3rem)] normal-nums lg:block">
       <div className="sticky top-24 rounded-xl border p-6 shadow-[0_6px_16px_rgba(0,0,0,0.12)]">
         <div className="grid grid-cols-1 items-baseline gap-4 lg:grid-cols-2">
           <div className="flex items-baseline gap-1.5 ">

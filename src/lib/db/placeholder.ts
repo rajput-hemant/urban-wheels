@@ -1,6 +1,5 @@
 import { BodyStyle } from "@/lib/enums";
 import { Icons } from "@/components/icons";
-
 import type {
   Car,
   Location,
