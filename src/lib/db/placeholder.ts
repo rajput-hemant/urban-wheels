@@ -19,16 +19,16 @@ const users = [
 ];
 
 export const bodyStyles = [
-  { slug: BodyStyle.HATCHBACK, name: "Hatchback", icon: Icons.hatchback },
+  { slug: BodyStyle.HYUNDAI, name: "Hyundai", icon: Icons.hyundai_a },
   { slug: BodyStyle.MINIVAN, name: "Minivan", icon: Icons.minivan },
   {
-    slug: BodyStyle.PICKUP_TRUCK,
-    name: "Pickup Truck",
-    icon: Icons.pickupTruck,
+    slug: BodyStyle.JEEP,
+    name: "Jeep",
+    icon: Icons.jeep_a,
   },
-  { slug: BodyStyle.SPORTS_CAR, name: "Sports Car", icon: Icons.sportsCar },
+  { slug: BodyStyle.KWID, name: "Kwid", icon: Icons.kwid },
   { slug: BodyStyle.SUV, name: "SUV", icon: Icons.suv },
-  { slug: BodyStyle.SEDAN, name: "Sedan", icon: Icons.sedan },
+  { slug: BodyStyle.TOYOTA, name: "Toyota", icon: Icons.toyota_a },
 ];
 
 export const locations: Location[] = [

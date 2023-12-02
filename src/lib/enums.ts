@@ -13,8 +13,8 @@ export enum SearchParams {
 export enum BodyStyle {
   SUV = "suv",
   MINIVAN = "minivan",
-  PICKUP_TRUCK = "pickup-truck",
-  SPORTS_CAR = "sports-car",
-  HATCHBACK = "hatchback",
-  SEDAN = "sedan",
+  JEEP = "jeep",
+  KWID = "kwid",
+  HYUNDAI = "hyundai",
+  TOYOTA = "toyota",
 }

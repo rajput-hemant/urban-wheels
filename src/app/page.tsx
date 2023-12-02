@@ -30,11 +30,11 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import {
-  hatchback,
+  hyundai,
   minivan,
-  pickupTruck,
-  sedan,
-  sportsCar,
+  jeep,
+  kwid,
+  toyota,
   suv,
 } from "@/public/images/cars/body-styles";
 import { cancun, dubai, paris, rome } from "@/public/images/locations";
@@ -89,12 +89,12 @@ async function Hero() {
 
 function BodyStyleCarExplorer() {
   const imageMap: { [key: string]: StaticImageData } = {
-    hatchback: hatchback,
+    hyundai: hyundai,
     minivan: minivan,
-    "pickup-truck": pickupTruck,
-    "sports-car": sportsCar,
+    jeep: jeep,
+    kwid: kwid,
     suv: suv,
-    sedan: sedan,
+    toyota,
   };
 
   return (
