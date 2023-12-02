@@ -76,7 +76,7 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
 
   return (
     <>
-      <div className="bg-background sticky inset-x-0 top-[57px] z-50 hidden h-16 items-center justify-start pt-px lg:flex">
+      <div className="bg-background sticky inset-x-0 top-[57px] z-50 hidden h-16 items-center justify-start border-b pt-px lg:flex">
         <div className="mx-auto w-full max-w-none px-5 sm:max-w-none sm:px-6">
           <div className="flex items-center justify-between">
             <p className="text-lg font-semibold">
@@ -100,7 +100,7 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
       <div className="relative flex lg:min-h-[calc(100dvh-8rem)]">
         <div className="w-full overflow-y-auto lg:w-[55%] xl:w-[63%]">
           <Suspense fallback={<CarCatalogSkeleton />}>
-            <div className="px-5 py-4 sm:px-2 lg:py-0">
+            <div className="p-4 sm:px-2 lg:py-2">
               {filteredCars.length ? (
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] justify-center gap-3">
                   {filteredCars.map(({ id, slug }, index) => (
@@ -123,7 +123,7 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
         </div>
 
         <div className="hidden flex-auto lg:block">
-          <div className="sticky top-[calc(7.5rem+1px)] mb-4 mr-2 flex min-h-[calc(100dvh-8rem)] overflow-hidden rounded-md border">
+          <div className="sticky top-[calc(8rem+1px)] mb-2 mr-2 flex min-h-[calc(100dvh-8.5rem)] overflow-hidden rounded-md border">
             <MapContainer />
           </div>
         </div>
