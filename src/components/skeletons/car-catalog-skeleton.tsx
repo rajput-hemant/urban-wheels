@@ -3,9 +3,9 @@ import { Skeleton } from "../ui/skeleton";
 
 export function CarCatalogSkeleton() {
   return (
-    <div className="px-5 pb-10 pt-8 sm:px-6 sm:py-8">
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] items-stretch justify-center gap-6">
-        {Array.from({ length: 8 }).map((_, i) => (
+    <div className="p-4 sm:px-2 lg:py-2">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] justify-center gap-3">
+        {Array.from({ length: 12 }).map((_, i) => (
           <CarCardSkeleton key={i} />
         ))}
       </div>
