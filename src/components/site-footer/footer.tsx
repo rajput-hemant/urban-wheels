@@ -3,9 +3,9 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
 import { Icons } from "../icons";
-import { NewsletterSubscriptionForm } from "../site-header/newsletter-subscription-form";
-import { ThemeToggleGroup } from "../site-header/theme-toggle-group";
 import { Separator } from "../ui/separator";
+import { NewsletterSubscriptionForm } from "./newsletter-subscription-form";
+import { ThemeToggleGroup } from "./theme-toggle-group";
 
 const footerLinks = [
   {

@@ -1,3 +1,5 @@
+import "@/styles/globals.css";
+
 import type { Metadata, Viewport } from "next";
 
 import { siteConfig } from "@/config/site";
@@ -8,8 +10,6 @@ import { SiteFooter } from "@/components/site-footer/footer";
 import { SiteHeader } from "@/components/site-header/navbar";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
-
-import "@/styles/globals.css";
 
 export const viewport: Viewport = {
   viewportFit: "cover",
