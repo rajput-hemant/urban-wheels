@@ -3,7 +3,6 @@
 import React from "react";
 
 import { cn, setCSSVariable } from "@/lib/utils";
-
 import { Icons } from "./icons";
 
 type LogoData = {

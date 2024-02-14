@@ -1,9 +1,8 @@
+import type { SelectedFilters } from "../filters";
 import type { Dispatch, SetStateAction } from "react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-import type { SelectedFilters } from "../filters";
+import { cn } from "@/lib/utils";
 
 type SeatingCapacityFiltersProps = {
   selectedFilters: SelectedFilters;
@@ -37,11 +36,11 @@ export function SeatingCapacityFilters(props: SeatingCapacityFiltersProps) {
                   "!bg-primary !text-background"
               )}
             >
-              {seats === undefined
-                ? "Any"
-                : index === array.length - 1
-                ? `${seats}+`
-                : seats}
+              {seats === undefined ?
+                "Any"
+              : index === array.length - 1 ?
+                `${seats}+`
+              : seats}
             </Button>
           );
         })}

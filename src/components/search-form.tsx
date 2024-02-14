@@ -9,8 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import type { Location } from "@/lib/db/definitions";
-import { SearchParams } from "@/lib/enums";
-import { cn, createUrl } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -34,6 +33,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { SearchParams } from "@/lib/enums";
+import { cn, createUrl } from "@/lib/utils";
 
 const FormSchema = z
   .object({
@@ -74,7 +75,6 @@ export function SearchForm({
     newParams.delete(SearchParams.CHECKOUT);
 
     newParams.set(SearchParams.LOCATION, location);
-
     const checkinISOString = checkin.toISOString();
     if (checkinISOString) newParams.set(SearchParams.CHECKIN, checkinISOString);
 
@@ -117,10 +117,10 @@ export function SearchForm({
             control={form.control}
             name="location"
             render={({ field }) => (
-              <FormItem className="grid h-full w-full grid-cols-1 items-start justify-center space-y-0 overflow-x-hidden px-4">
+              <FormItem className="grid size-full grid-cols-1 items-start justify-center space-y-0 overflow-x-hidden px-4">
                 <FormLabel
                   className={cn(
-                    "inline-block h-full w-full font-bold",
+                    "inline-block size-full font-bold",
                     compact ? "text-xs" : "text-sm"
                   )}
                 >
@@ -140,11 +140,11 @@ export function SearchForm({
                           field.value && "font-medium"
                         )}
                       >
-                        {field.value
-                          ? locations.find(
-                              (location) => location.value === field.value
-                            )?.name
-                          : "Select location"}
+                        {field.value ?
+                          locations.find(
+                            (location) => location.value === field.value
+                          )?.name
+                        : "Select location"}
                       </button>
                     </FormControl>
                   </PopoverTrigger>
@@ -164,10 +164,10 @@ export function SearchForm({
                           >
                             <Check
                               className={cn(
-                                "mr-2 h-4 w-4 shrink-0",
-                                value === field.value
-                                  ? "opacity-100"
-                                  : "opacity-0"
+                                "mr-2 size-4 shrink-0",
+                                value === field.value ?
+                                  "opacity-100"
+                                : "opacity-0"
                               )}
                             />
                             {name}
@@ -203,7 +203,7 @@ export function SearchForm({
               <FormItem className="grid h-full shrink-0 grow-0 grid-cols-1 items-start justify-center space-y-0 px-4">
                 <FormLabel
                   className={cn(
-                    "inline-block h-full w-full font-bold",
+                    "inline-block size-full font-bold",
                     compact ? "text-xs" : "text-sm"
                   )}
                 >
@@ -219,11 +219,9 @@ export function SearchForm({
                           field.value && "font-medium"
                         )}
                       >
-                        {field.value ? (
+                        {field.value ?
                           format(field.value, "LLL dd, y")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
+                        : <span>Pick a date</span>}
                       </button>
                     </FormControl>
                   </PopoverTrigger>
@@ -264,7 +262,7 @@ export function SearchForm({
               <FormItem className="grid h-full shrink-0 grow-0 grid-cols-1 items-start justify-center space-y-0 px-4">
                 <FormLabel
                   className={cn(
-                    "inline-block h-full w-full font-bold",
+                    "inline-block size-full font-bold",
                     compact ? "text-xs" : "text-sm"
                   )}
                 >
@@ -280,11 +278,9 @@ export function SearchForm({
                           field.value && "font-medium"
                         )}
                       >
-                        {field.value ? (
+                        {field.value ?
                           format(field.value, "LLL dd, y")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
+                        : <span>Pick a date</span>}
                       </button>
                     </FormControl>
                   </PopoverTrigger>
@@ -315,7 +311,7 @@ export function SearchForm({
           <span className="sr-only">Search</span>
           <Search
             strokeWidth={3}
-            className={cn(compact ? "h-4 w-4" : "h-5 w-5")}
+            className={cn(compact ? "size-4" : "size-5")}
           />
         </Button>
       </form>

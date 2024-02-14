@@ -10,7 +10,7 @@ export function ReservationSidebarSkeleton() {
           </div>
 
           <div className="flex items-baseline gap-1 tracking-tight lg:justify-end">
-            <Skeleton className="h-5 w-5" />
+            <Skeleton className="size-5" />
             <Skeleton className="h-5 w-14 shrink-0" />
           </div>
         </div>

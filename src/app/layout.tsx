@@ -2,20 +2,20 @@ import "@/styles/globals.css";
 
 import type { Metadata, Viewport } from "next";
 
-import { siteConfig } from "@/config/site";
-import { fontHeading, fontSans } from "@/lib/fonts";
-import { absoluteUrl, cn } from "@/lib/utils";
 import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer/footer";
 import { SiteHeader } from "@/components/site-header/navbar";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
+import { siteConfig } from "@/config/site";
+import { fontHeading, fontSans } from "@/lib/fonts";
+import { absoluteUrl, cn } from "@/lib/utils";
 
 export const viewport: Viewport = {
   viewportFit: "cover",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
   userScalable: true,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
 };
 
-const RootLayout = ({ children }: React.PropsWithChildren) => {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -84,6 +84,4 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}

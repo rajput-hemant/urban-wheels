@@ -1,7 +1,6 @@
 import React from "react";
 
 import { cn } from "@/lib/utils";
-
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 
@@ -24,7 +23,7 @@ export function SearchFormSkeleton({
       {...props}
     >
       <div>
-        <div className="grid h-full w-full grid-cols-1 items-start justify-center gap-y-2 overflow-x-hidden px-4">
+        <div className="grid size-full grid-cols-1 items-start justify-center gap-y-2 overflow-x-hidden px-4">
           <Skeleton className={cn("w-28", compact ? "h-2" : "h-3")} />
           <Skeleton className={cn("w-24", compact ? "h-3" : "h-4 ")} />
         </div>
@@ -37,7 +36,7 @@ export function SearchFormSkeleton({
       />
 
       <div>
-        <div className="grid h-full w-full grid-cols-1 items-start justify-center gap-y-2 overflow-x-hidden px-4">
+        <div className="grid size-full grid-cols-1 items-start justify-center gap-y-2 overflow-x-hidden px-4">
           <Skeleton className={cn("w-16", compact ? "h-2" : "h-3")} />
           <Skeleton className={cn("w-20", compact ? "h-3" : "h-4 ")} />
         </div>
@@ -50,14 +49,14 @@ export function SearchFormSkeleton({
       />
 
       <div>
-        <div className="grid h-full w-full grid-cols-1 items-start justify-center gap-y-2 overflow-x-hidden px-4">
+        <div className="grid size-full grid-cols-1 items-start justify-center gap-y-2 overflow-x-hidden px-4">
           <Skeleton className={cn("w-16", compact ? "h-2" : "h-3")} />
           <Skeleton className={cn("w-20", compact ? "h-3" : "h-4 ")} />
         </div>
       </div>
 
       <Skeleton
-        className={cn("rounded-full", compact ? "h-10 w-10" : "h-12 w-12")}
+        className={cn("rounded-full", compact ? "size-10" : "size-12")}
       />
     </div>
   );

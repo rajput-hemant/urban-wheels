@@ -1,14 +1,13 @@
 import { Suspense } from "react";
 import { FilterX } from "lucide-react";
 
-import { fetchCars, fetchLocations } from "@/lib/db/queries";
-import { SearchParams } from "@/lib/enums";
-import { slugify } from "@/lib/utils";
 import { MapContainer } from "@/components/map-container";
 import { SearchForm } from "@/components/search-form";
 import { CarCatalogSkeleton } from "@/components/skeletons/car-catalog-skeleton";
 import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
-
+import { fetchCars, fetchLocations } from "@/lib/db/queries";
+import { SearchParams } from "@/lib/enums";
+import { slugify } from "@/lib/utils";
 import { CarCard } from "./car-card";
 import { Filters } from "./filters";
 
@@ -101,14 +100,13 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
         <div className="w-full overflow-y-auto lg:w-[55%] xl:w-[63%]">
           <Suspense fallback={<CarCatalogSkeleton />}>
             <div className="p-4 sm:px-2 lg:py-2">
-              {filteredCars.length ? (
+              {filteredCars.length ?
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] justify-center gap-3">
                   {filteredCars.map(({ id, slug }, index) => (
                     <CarCard key={id} index={index} slug={slug} />
                   ))}
                 </div>
-              ) : (
-                <div className="flex h-[calc(100dvh-11rem)] flex-col items-center justify-center rounded-md border-2 border-dashed">
+              : <div className="flex h-[calc(100dvh-11rem)] flex-col items-center justify-center rounded-md border-2 border-dashed">
                   <FilterX size={44} />
                   <div className="text-center">
                     <h1 className="text-xl font-semibold">No exact matches</h1>
@@ -117,7 +115,7 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
                     </p>
                   </div>
                 </div>
-              )}
+              }
             </div>
           </Suspense>
         </div>

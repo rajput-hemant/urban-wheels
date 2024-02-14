@@ -3,9 +3,9 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export type User = {
   id: string;
-  name?: string;
-  email?: string;
-  image?: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
 } | null;
 
 export const getUserAuth = async () => {
@@ -18,7 +18,7 @@ export const getUserAuth = async () => {
       name: `${user.given_name} ${user.family_name ?? ""}`.trim(),
       email: user.email,
       image: user.picture,
-    } as User;
+    } satisfies User;
   } else {
     return null;
   }

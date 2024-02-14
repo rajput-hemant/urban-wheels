@@ -1,11 +1,10 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { SelectedFilters } from "../filters";
 import type { CheckedState } from "@radix-ui/react-checkbox";
+import type { Dispatch, SetStateAction } from "react";
 
-import { EngineType } from "@/lib/enums";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-
-import type { SelectedFilters } from "../filters";
+import { EngineType } from "@/lib/enums";
 
 const engineTypes = [
   { slug: EngineType.GAS, name: "Gas" },
@@ -23,8 +22,9 @@ export function EngineTypeFilters(props: EngineTypeFiltersProps) {
 
   const toggleEngineType = (engineType: EngineType, checked: CheckedState) => {
     setSelectedFilters((filters) => {
-      const engineTypes = checked
-        ? [...filters.engineTypes, engineType]
+      const engineTypes =
+        checked ?
+          [...filters.engineTypes, engineType]
         : filters.engineTypes.filter((et) => et !== engineType);
 
       return { ...filters, engineTypes };
@@ -42,7 +42,7 @@ export function EngineTypeFilters(props: EngineTypeFiltersProps) {
               id={slug}
               checked={selectedFilters.engineTypes.includes(slug)}
               onCheckedChange={(checked) => toggleEngineType(slug, checked)}
-              className="h-6 w-6 rounded-md"
+              className="size-6 rounded-md"
             />
 
             <Label

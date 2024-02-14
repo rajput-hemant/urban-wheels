@@ -1,8 +1,8 @@
 import { Star } from "lucide-react";
 
 import type { Location } from "@/lib/db/definitions";
-import { formatCurrency } from "@/lib/utils";
 
+import { formatCurrency } from "@/lib/utils";
 import { ReservationForm } from "./reservation-form";
 
 type ReservationSidebarProps = {
@@ -32,7 +32,7 @@ export function ReservationSidebar({
           </div>
 
           <div className="flex items-baseline gap-1 tracking-tight lg:justify-end">
-            <Star className="h-3.5 w-3.5 self-center" />
+            <Star className="size-3.5 self-center" />
 
             <span className="text-sm font-medium">{rating}</span>
             {reviews > 0 && (

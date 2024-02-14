@@ -4,13 +4,8 @@ import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Filter } from "lucide-react";
 
-import {
-  SearchParams,
-  type BodyStyle,
-  type EngineType,
-  type Transmission,
-} from "@/lib/enums";
-import { createUrl } from "@/lib/utils";
+import type { BodyStyle, EngineType, Transmission } from "@/lib/enums";
+
 import { CounterBadge } from "@/components/counter-badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -22,7 +17,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-
+import { SearchParams } from "@/lib/enums";
+import { createUrl } from "@/lib/utils";
 import { BodyStyleFilters } from "./filters/body-styles";
 import { EngineTypeFilters } from "./filters/engine-types";
 import { PriceRangeFilters } from "./filters/price-range";
@@ -187,7 +183,7 @@ export function Filters({ initialMinPrice, initialMaxPrice }: FiltersProps) {
           className: "relative",
         })}
       >
-        <Filter className="mr-2 h-4 w-4 shrink-0" />
+        <Filter className="mr-2 size-4 shrink-0" />
         Filters
         <CounterBadge count={totalSelectedFilters} />
       </DialogTrigger>

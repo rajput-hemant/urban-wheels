@@ -4,12 +4,12 @@ import "leaflet/dist/leaflet.css";
 
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import type { LatLngExpression, Map as LeafletMap } from "leaflet";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 
+import type { LatLngExpression, Map as LeafletMap } from "leaflet";
 import type { Location } from "@/lib/db/definitions";
-import { SearchParams } from "@/lib/enums";
 
+import { SearchParams } from "@/lib/enums";
 import { Skeleton } from "./ui/skeleton";
 
 const DEFAULT_ZOOM_LEVEL = 2;
@@ -48,8 +48,8 @@ export default function Map({ locations }: { locations: Location[] }) {
       ref={mapRef}
       center={[0, 0]}
       zoom={DEFAULT_ZOOM_LEVEL}
-      className="flex h-full w-full"
-      placeholder={<Skeleton className="h-full w-full" />}
+      className="flex size-full"
+      placeholder={<Skeleton className="size-full" />}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

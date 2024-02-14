@@ -15,11 +15,11 @@ export function CarCatalogSkeleton() {
 
 export function CarCardSkeleton() {
   return (
-    <div className="h-full w-full rounded-xl border shadow-sm">
+    <div className="size-full rounded-xl border shadow-sm">
       <div className="mb-4 flex justify-between p-6">
         <Skeleton className="h-5 w-1/2" />
         <div className="flex w-1/3 gap-1.5">
-          <Skeleton className="h-5 w-5 shrink-0" />
+          <Skeleton className="size-5 shrink-0" />
           <Skeleton className="h-5 w-full" />
         </div>
       </div>

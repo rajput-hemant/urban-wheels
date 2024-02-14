@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,6 +9,16 @@ import {
   Sparkle,
 } from "lucide-react";
 
+import type { StaticImageData } from "next/image";
+
+import { Icons } from "@/components/icons";
+import { LogoSlider } from "@/components/logo-slider";
+import { SearchForm } from "@/components/search-form";
+import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { siteConfig } from "@/config/site";
 import {
   fetchFeaturedLocations,
@@ -19,15 +28,6 @@ import {
 } from "@/lib/db/queries";
 import { SearchParams } from "@/lib/enums";
 import { formatCurrency, getGitHubStars } from "@/lib/utils";
-import { Icons } from "@/components/icons";
-import { LogoSlider } from "@/components/logo-slider";
-import { SearchForm } from "@/components/search-form";
-import { SearchFormSkeleton } from "@/components/skeletons/search-form-skeleton";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
-
 import {
   hatchback,
   minivan,
@@ -57,21 +57,21 @@ async function Hero() {
   const locations = await fetchLocations();
   return (
     <section className="from-background to-muted via-muted border-b bg-gradient-to-b">
-      <h1 className="from-foreground font-heading bg-gradient-to-t to-zinc-600 bg-clip-text text-center text-5xl text-transparent dark:bg-gradient-to-b xl:text-6xl">
+      <h1 className="from-foreground font-heading bg-gradient-to-t to-zinc-600 bg-clip-text text-center text-5xl text-transparent xl:text-6xl dark:bg-gradient-to-b">
         Find your car
       </h1>
 
       <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center justify-center gap-4 text-sm font-medium md:gap-12">
         <div className="flex shrink-0 items-center justify-center gap-1.5">
-          <CheckCircle className="h-5 w-5 shrink-0 text-green-500" />
+          <CheckCircle className="size-5 shrink-0 text-green-500" />
           <span>No hidden fees.</span>
         </div>
         <div className="flex shrink-0 items-center justify-center gap-1.5">
-          <CheckCircle className="h-5 w-5 shrink-0 text-green-500" />
+          <CheckCircle className="size-5 shrink-0 text-green-500" />
           <span>Transparent pricing.</span>
         </div>
         <div className="flex shrink-0 items-center justify-center gap-1.5">
-          <CheckCircle className="h-5 w-5 shrink-0 text-green-500" />
+          <CheckCircle className="size-5 shrink-0 text-green-500" />
           <span>Flexible cancellations.</span>
         </div>
       </div>
@@ -131,7 +131,7 @@ function BodyStyleCarExplorer() {
                     </span>
                   </div>
 
-                  {imageUrl ? (
+                  {imageUrl ?
                     <Image
                       priority
                       src={imageUrl}
@@ -139,11 +139,9 @@ function BodyStyleCarExplorer() {
                       width={250}
                       height={144}
                       placeholder="blur"
-                      className="h-full w-full bg-gradient-to-r from-[#f9f9f9] to-[#e9e9e9] object-cover object-center duration-300 group-hover:scale-110"
+                      className="size-full bg-gradient-to-r from-[#f9f9f9] to-[#e9e9e9] object-cover object-center duration-300 group-hover:scale-110"
                     />
-                  ) : (
-                    <Skeleton className="h-full w-full" />
-                  )}
+                  : <Skeleton className="size-full" />}
                 </div>
               );
             })}
@@ -191,19 +189,17 @@ async function DestinationCarExplorer() {
               }}
               className="px-1.5 pb-4 pt-1"
             >
-              <div className="group h-full w-full overflow-hidden rounded-2xl border">
+              <div className="group size-full overflow-hidden rounded-2xl border">
                 <AspectRatio ratio={16 / 9}>
-                  {imageUrl ? (
+                  {imageUrl ?
                     <Image
                       src={imageUrl}
                       alt={name}
                       fill
-                      className="h-full w-full object-cover object-center duration-300 group-hover:scale-105"
+                      className="size-full object-cover object-center duration-300 group-hover:scale-105"
                       placeholder="blur"
                     />
-                  ) : (
-                    <Skeleton className="h-full w-full" />
-                  )}
+                  : <Skeleton className="size-full" />}
                 </AspectRatio>
               </div>
 
@@ -233,8 +229,8 @@ function Features() {
 
         <div className="mt-12 grid grid-cols-1 items-center justify-center gap-8 md:grid-cols-3">
           <div className="flex flex-col items-center justify-center text-center md:items-start md:text-left">
-            <div className="bg-background flex h-12 w-12 items-center justify-center rounded-full border">
-              <Sparkle className="h-6 w-6 text-neutral-500" />
+            <div className="bg-background flex size-12 items-center justify-center rounded-full border">
+              <Sparkle className="size-6 text-neutral-500" />
             </div>
             <p className="mt-6 font-semibold">Hassle-Free Booking</p>
             <p className="text-muted-foreground mt-2 max-w-sm text-sm leading-5">
@@ -244,8 +240,8 @@ function Features() {
           </div>
 
           <div className="flex flex-col items-center justify-center text-center md:items-start md:text-left">
-            <div className="bg-background flex h-12 w-12 items-center justify-center rounded-full border">
-              <ShieldCheck className="h-6 w-6 text-neutral-500" />
+            <div className="bg-background flex size-12 items-center justify-center rounded-full border">
+              <ShieldCheck className="size-6 text-neutral-500" />
             </div>
             <p className="mt-6 font-semibold">Secure Rentals</p>
             <p className="text-muted-foreground mt-2 max-w-sm text-sm leading-5">
@@ -256,8 +252,8 @@ function Features() {
           </div>
 
           <div className="flex flex-col items-center justify-center text-center md:items-start md:text-left">
-            <div className="bg-background flex h-12 w-12 items-center justify-center rounded-full border">
-              <Navigation className="h-6 w-6 text-neutral-500" />
+            <div className="bg-background flex size-12 items-center justify-center rounded-full border">
+              <Navigation className="size-6 text-neutral-500" />
             </div>
             <p className="mt-6 font-semibold">Easy Navigation</p>
             <p className="text-muted-foreground mt-2 max-w-sm text-sm leading-5">
@@ -295,7 +291,7 @@ async function Testimonials() {
                     alt={name}
                     height={40}
                     width={40}
-                    className="h-12 w-12 rounded-full border"
+                    className="size-12 rounded-full border"
                   />
 
                   <div>
@@ -328,7 +324,7 @@ function CarExplorer() {
               className="flex items-center justify-center gap-x-2 font-semibold"
             >
               Explore Cars
-              <ChevronRight className="h-4 w-4 duration-300 group-hover:translate-x-2" />
+              <ChevronRight className="size-4 duration-300 group-hover:translate-x-2" />
             </Link>
           </Button>
         </div>
@@ -368,12 +364,12 @@ async function OpenSource() {
             rel="noreferrer"
             className="flex"
           >
-            <div className="bg-foreground flex h-10 w-10 items-center justify-center rounded-md shadow-md hover:shadow-lg">
-              <Icons.gitHub className="text-background h-6 w-6" />
+            <div className="bg-foreground flex size-10 items-center justify-center rounded-md shadow-md hover:shadow-lg">
+              <Icons.gitHub className="text-background size-6" />
             </div>
 
             <div className="flex items-center">
-              <div className="border-foreground h-4 w-4 border-y-8 border-r-8 border-y-transparent" />
+              <div className="border-foreground size-4 border-y-8 border-r-8 border-y-transparent" />
               <div className="border-foreground bg-foreground text-background flex h-10 items-center rounded-md border px-4 font-medium shadow-md hover:shadow-lg">
                 {stars} stars on GitHub
               </div>

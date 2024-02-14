@@ -1,9 +1,6 @@
 {
   "hasSrc": true,
-  "packages": [
-    "drizzle",
-    "kinde"
-  ],
+  "packages": ["drizzle", "kinde"],
   "preferredPackageManager": "bun",
   "t3": false,
   "alias": "@",

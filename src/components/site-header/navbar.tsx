@@ -9,7 +9,6 @@ import { LogOut, Settings, User2 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { getUserAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
-
 import { Icons } from "../icons";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { buttonVariants } from "../ui/button";
@@ -30,13 +29,13 @@ export async function SiteHeader() {
       <div className="container flex h-14 items-center space-x-4">
         <Link href="/" className="flex items-center">
           <div className="flex items-center gap-1 font-bold">
-            <Icons.logo className="h-6 w-6" />
+            <Icons.logo className="size-6" />
             <span>{siteConfig.name}</span>
           </div>
         </Link>
 
         <div className="flex flex-1 justify-end gap-2">
-          {!user ? (
+          {!user ?
             <>
               <RegisterLink
                 className={cn(
@@ -56,8 +55,7 @@ export async function SiteHeader() {
                 Login
               </LoginLink>
             </>
-          ) : (
-            <DropdownMenu>
+          : <DropdownMenu>
               <DropdownMenuTrigger className="rounded-full">
                 <Avatar>
                   <AvatarImage src="https://github.com/rajput-hemant.png" />
@@ -75,14 +73,14 @@ export async function SiteHeader() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/account">
-                    <User2 className="mr-2 h-4 w-4" />
+                    <User2 className="mr-2 size-4" />
                     My Account
                   </Link>
                 </DropdownMenuItem>
 
                 <DropdownMenuItem asChild>
                   <Link href="/settings">
-                    <Settings className="mr-2 h-4 w-4" />
+                    <Settings className="mr-2 size-4" />
                     Settings
                   </Link>
                 </DropdownMenuItem>
@@ -90,13 +88,13 @@ export async function SiteHeader() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <LogoutLink>
-                    <LogOut className="mr-2 h-4 w-4" />
+                    <LogOut className="mr-2 size-4" />
                     Logout
                   </LogoutLink>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          )}
+          }
         </div>
       </div>
     </header>

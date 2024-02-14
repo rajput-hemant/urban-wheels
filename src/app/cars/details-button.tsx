@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
 import { SearchParams } from "@/lib/enums";
 import { createUrl } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 export function CarDetailsButton({ slug }: { slug: string }) {
   const searchParams = useSearchParams();

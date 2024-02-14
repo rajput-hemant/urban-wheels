@@ -25,7 +25,7 @@ export function CarOverviewSkeleton() {
 
       <div className="flex flex-col gap-6">
         <div className="flex gap-8">
-          <Skeleton className="h-6 w-6 shrink-0" />
+          <Skeleton className="size-6 shrink-0" />
           <div className="flex flex-col">
             <Skeleton className="h-5 w-14" />
             <Skeleton className="mt-2 h-3 w-40" />
@@ -33,7 +33,7 @@ export function CarOverviewSkeleton() {
         </div>
 
         <div className="flex gap-8">
-          <Skeleton className="h-6 w-6 shrink-0" />
+          <Skeleton className="size-6 shrink-0" />
           <div className="flex flex-col">
             <Skeleton className="h-5 w-20" />
             <Skeleton className="mt-2 h-3 w-44" />
@@ -41,7 +41,7 @@ export function CarOverviewSkeleton() {
         </div>
 
         <div className="flex gap-8">
-          <Skeleton className="h-6 w-6 shrink-0" />
+          <Skeleton className="size-6 shrink-0" />
           <div className="flex flex-col">
             <Skeleton className="h-5 w-20" />
             <Skeleton className="mt-2 h-3 w-56" />
@@ -70,7 +70,7 @@ export function CarOverviewSkeleton() {
         <div className="mt-6 grid grid-cols-2 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="flex gap-4">
-              <Skeleton className="h-5 w-5 shrink-0" />
+              <Skeleton className="size-5 shrink-0" />
               <Skeleton className="h-5 w-2/3" />
             </div>
           ))}

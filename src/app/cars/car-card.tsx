@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { Gauge, Star } from "lucide-react";
 
-import { fetchCarBySlug } from "@/lib/db/queries";
-import { cn, formatCurrency } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -11,7 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-
+import { fetchCarBySlug } from "@/lib/db/queries";
+import { cn, formatCurrency } from "@/lib/utils";
 import { CarDetailsButton } from "./details-button";
 
 type CarCardProps = {
@@ -50,7 +49,7 @@ export async function CarCard({ index, slug }: CarCardProps) {
           </CardTitle>
 
           <div className="text-muted-foreground flex items-baseline gap-1 text-right">
-            <Star className="h-[14px] w-[14px] self-center" />
+            <Star className="size-[14px] self-center" />
 
             <span className="text-sm font-medium leading-none">
               {rating} {reviews > 0 && `(${reviews})`}
@@ -64,7 +63,7 @@ export async function CarCard({ index, slug }: CarCardProps) {
             !unlimited_mileage && "invisible"
           )}
         >
-          <Gauge className="mr-1.5 inline-block h-4 w-4" />
+          <Gauge className="mr-1.5 inline-block size-4" />
           Unlimited mileage
         </div>
       </CardHeader>
@@ -91,7 +90,7 @@ export async function CarCard({ index, slug }: CarCardProps) {
         </div>
 
         <div className="mt-4 text-base">
-          {discounted_price_per_day ? (
+          {discounted_price_per_day ?
             <>
               <span className="text-muted-foreground mr-1.5 line-through">
                 {retail_price_per_day}
@@ -104,11 +103,10 @@ export async function CarCard({ index, slug }: CarCardProps) {
                 )}
               </span>
             </>
-          ) : (
-            <span className=" font-semibold">
+          : <span className=" font-semibold">
               {formatCurrency(retail_price_per_day, retail_price_currency)}
             </span>
-          )}
+          }
 
           <span className="ml-1 text-sm font-medium">day</span>
         </div>

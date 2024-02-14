@@ -9,8 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import type { Location } from "@/lib/db/definitions";
-import { SearchParams } from "@/lib/enums";
-import { cn, formatCurrency } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -33,6 +32,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { toast } from "@/components/ui/use-toast";
+import { SearchParams } from "@/lib/enums";
+import { cn, formatCurrency } from "@/lib/utils";
 
 const FormSchema = z
   .object({
@@ -127,11 +128,10 @@ export function ReservationForm({
                           aria-label="select location"
                           className="text-muted-foreground hover:text-foreground flex h-[58px] w-full flex-col justify-end truncate border-b p-2.5 text-left text-sm duration-200"
                         >
-                          {field.value
-                            ? locations.find(
-                                ({ value }) => value === field.value
-                              )?.name
-                            : "Select location"}
+                          {field.value ?
+                            locations.find(({ value }) => value === field.value)
+                              ?.name
+                          : "Select location"}
                         </button>
                       </FormControl>
                     </PopoverTrigger>
@@ -151,10 +151,10 @@ export function ReservationForm({
                             >
                               <Check
                                 className={cn(
-                                  "mr-2 h-4 w-4 shrink-0",
-                                  value === field.value
-                                    ? "opacity-100"
-                                    : "opacity-0"
+                                  "mr-2 size-4 shrink-0",
+                                  value === field.value ?
+                                    "opacity-100"
+                                  : "opacity-0"
                                 )}
                               />
                               {name}
@@ -182,11 +182,9 @@ export function ReservationForm({
                       <PopoverTrigger asChild>
                         <FormControl>
                           <button className="text-muted-foreground hover:text-foreground flex h-14 w-full flex-col justify-end truncate p-2.5 text-left text-sm duration-200">
-                            {field.value ? (
+                            {field.value ?
                               format(field.value, "dd/MM/yyyy")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
+                            : <span>Pick a date</span>}
                           </button>
                         </FormControl>
                       </PopoverTrigger>
@@ -218,11 +216,9 @@ export function ReservationForm({
                       <PopoverTrigger asChild>
                         <FormControl>
                           <button className="text-muted-foreground hover:text-foreground flex h-14 w-full flex-col justify-end truncate p-2.5 text-left text-sm duration-200">
-                            {field.value ? (
+                            {field.value ?
                               format(field.value, "dd/MM/yyyy")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
+                            : <span>Pick a date</span>}
                           </button>
                         </FormControl>
                       </PopoverTrigger>

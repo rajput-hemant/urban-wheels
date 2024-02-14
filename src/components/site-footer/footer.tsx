@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
-
 import { Icons } from "../icons";
 import { Separator } from "../ui/separator";
 import { NewsletterSubscriptionForm } from "./newsletter-subscription-form";
@@ -94,7 +93,7 @@ export function SiteFooter() {
                 rel="noreferrer"
                 className="hover:text-foreground duration-200"
               >
-                <Icons.gitHub className="h-4 w-4 shrink-0" />
+                <Icons.gitHub className="size-4 shrink-0" />
               </a>
 
               <Separator orientation="vertical" className="h-4" />
@@ -105,7 +104,7 @@ export function SiteFooter() {
                 rel="noreferrer"
                 className="hover:text-foreground duration-200"
               >
-                <Icons.x className="h-4 w-4 shrink-0" />
+                <Icons.x className="size-4 shrink-0" />
               </a>
             </div>
           </div>

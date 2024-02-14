@@ -1,11 +1,10 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { SelectedFilters } from "../filters";
 import type { CheckedState } from "@radix-ui/react-checkbox";
+import type { Dispatch, SetStateAction } from "react";
 
-import { Transmission } from "@/lib/enums";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-
-import type { SelectedFilters } from "../filters";
+import { Transmission } from "@/lib/enums";
 
 const transmissions = [
   { slug: Transmission.AUTOMATIC, name: "Automatic" },
@@ -25,8 +24,9 @@ export function TransmissionFilters(props: TransmissionFiltersProps) {
     transmission: Transmission
   ) => {
     setSelectedFilters((filters) => {
-      const transmissions = checked
-        ? [...filters.transmissions, transmission]
+      const transmissions =
+        checked ?
+          [...filters.transmissions, transmission]
         : filters.transmissions.filter((t) => t !== transmission);
 
       return { ...filters, transmissions };
@@ -44,7 +44,7 @@ export function TransmissionFilters(props: TransmissionFiltersProps) {
               id={slug}
               checked={selectedFilters.transmissions.includes(slug)}
               onCheckedChange={(checked) => handleCheckedChange(checked, slug)}
-              className="h-6 w-6 rounded-md"
+              className="size-6 rounded-md"
             />
             <Label
               htmlFor={slug}

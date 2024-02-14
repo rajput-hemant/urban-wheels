@@ -1,10 +1,9 @@
+import type { SelectedFilters } from "../filters";
 import type { Dispatch, SetStateAction } from "react";
 
-import { BodyStyle } from "@/lib/enums";
 import { Icons } from "@/components/icons";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-
-import type { SelectedFilters } from "../filters";
+import { BodyStyle } from "@/lib/enums";
 
 export const bodyStyles = [
   { slug: BodyStyle.HATCHBACK, name: "Hatchback", icon: Icons.hatchback },
@@ -43,7 +42,7 @@ export function BodyStyleFilters(props: BodyStyleFiltersProps) {
         variant="outline"
         value={selectedFilters.bodyStyles}
         onValueChange={toggleBodyStyle}
-        className="grid h-full w-full grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-4"
+        className="grid size-full grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-4"
       >
         {bodyStyles.map(({ icon: Icon, slug, name }) => {
           return (
@@ -52,7 +51,7 @@ export function BodyStyleFilters(props: BodyStyleFiltersProps) {
               value={slug}
               className="flex h-32 w-full flex-col items-start justify-between p-4"
             >
-              {Icon && <Icon className="h-8 w-8" />}
+              <Icon className="size-8" />
               <span className="text-base font-medium">{name}</span>
             </ToggleGroupItem>
           );

@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Check, Gift, LifeBuoy, Map } from "lucide-react";
 
-import { fetchCarBySlug, fetchCars, fetchLocations } from "@/lib/db/queries";
+import type { Metadata } from "next";
 
+import { fetchCarBySlug, fetchCars, fetchLocations } from "@/lib/db/queries";
 import { ReservationSidebar } from "./reservation-sidebar";
 
 type CarPageProps = {
@@ -79,7 +79,7 @@ export default async function CarDetailsPage({ params }: CarPageProps) {
 
           <div className="flex flex-col gap-6">
             <div className="flex gap-8">
-              <Gift className="h-6 w-6 shrink-0" />
+              <Gift className="size-6 shrink-0" />
               <div className="flex flex-col">
                 <p className="font-semibold">Exclusive Deals</p>
                 <p className="text-muted-foreground mt-0.5 text-sm leading-5">
@@ -90,7 +90,7 @@ export default async function CarDetailsPage({ params }: CarPageProps) {
             </div>
 
             <div className="flex gap-8">
-              <Map className="h-6 w-6 shrink-0" />
+              <Map className="size-6 shrink-0" />
               <div className="flex flex-col">
                 <p className="font-semibold">Local Tips</p>
                 <p className="text-muted-foreground mt-0.5 text-sm leading-5">
@@ -101,7 +101,7 @@ export default async function CarDetailsPage({ params }: CarPageProps) {
             </div>
 
             <div className="flex gap-8">
-              <LifeBuoy className="h-6 w-6 shrink-0" />
+              <LifeBuoy className="size-6 shrink-0" />
               <div className="flex flex-col">
                 <p className="font-semibold">24/7 Roadside Assistance</p>
                 <p className="text-muted-foreground mt-0.5 text-sm leading-5">
@@ -129,7 +129,7 @@ export default async function CarDetailsPage({ params }: CarPageProps) {
             <div className="mt-6 grid grid-cols-2 gap-4">
               {car.features.map((feature) => (
                 <div key={feature} className="flex items-center gap-4">
-                  <Check className="h-4 w-4 shrink-0" />
+                  <Check className="size-4 shrink-0" />
                   <p className="text-muted-foreground">{feature}</p>
                 </div>
               ))}

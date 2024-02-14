@@ -20,7 +20,7 @@ export default function NotFound() {
             className="flex items-center justify-center gap-x-2.5"
           >
             Explore Our Cars
-            <ChevronRight className="h-3 w-3 duration-200 group-hover:translate-x-2" />
+            <ChevronRight className="size-3 duration-200 group-hover:translate-x-2" />
           </Link>
         </Button>
 
