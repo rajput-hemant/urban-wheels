@@ -6,7 +6,7 @@ export const env = createEnv({
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
    * useful for Docker builds.
    */
-  skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
+  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app
@@ -22,43 +22,64 @@ export const env = createEnv({
       .default("development"),
 
     /* -----------------------------------------------------------------------------------------------
-     * Kinde Auth
+     * NextAuth.js
      * -----------------------------------------------------------------------------------------------*/
 
-    KINDE_CLIENT_ID: z.string(),
-    KINDE_CLIENT_SECRET: z.string(),
-    KINDE_ISSUER_URL: z.string().url(),
-    KINDE_SITE_URL: z.string().default("http://localhost:3000"),
-    KINDE_POST_LOGOUT_REDIRECT_URL: z.string().default("http://localhost:3000"),
-    KINDE_POST_LOGIN_REDIRECT_URL: z.string().default("http://localhost:3000"),
+    NEXTAUTH_SECRET:
+      process.env.NODE_ENV === "production" ?
+        z.string()
+      : z.string().optional(),
+    NEXTAUTH_URL: z.preprocess(
+      // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
+      // Since NextAuth.js automatically uses the VERCEL_URL if present.
+      (str) => process.env.VERCEL_URL ?? str,
+      // VERCEL_URL doesn't include `https` so it cant be validated as a URL
+      process.env.VERCEL ? z.string() : z.string().url()
+    ),
 
     /* -----------------------------------------------------------------------------------------------
      * Google OAuth
      * -----------------------------------------------------------------------------------------------*/
 
-    GOOGLE_CLIENT_ID: z.string(),
-    GOOGLE_CLIENT_SECRET: z.string(),
+    GOOGLE_CLIENT_ID: z
+      .string()
+      .min(1, { message: "Google Client ID is invalid or missing" }),
+    GOOGLE_CLIENT_SECRET: z
+      .string()
+      .min(1, { message: "Google Client Secret is invalid or missing" }),
 
     /* -----------------------------------------------------------------------------------------------
      * Github OAuth
      * -----------------------------------------------------------------------------------------------*/
 
-    GITHUB_ACCESS_TOKEN: z.string().optional(),
-    GITHUB_CLIENT_ID: z.string(),
-    GITHUB_CLIENT_SECRET: z.string(),
+    GITHUB_CLIENT_ID: z
+      .string()
+      .min(1, { message: "Github Client ID is invalid or missing" }),
+    GITHUB_CLIENT_SECRET: z
+      .string()
+      .min(1, { message: "Github Client Secret is invalid or missing" }),
+    GITHUB_ACCESS_TOKEN: z
+      .string()
+      .min(1, { message: "Github Access Token is invalid or missing" }),
 
     /* -----------------------------------------------------------------------------------------------
      * Discord OAuth
      * -----------------------------------------------------------------------------------------------*/
 
-    DISCORD_CLIENT_ID: z.string(),
-    DISCORD_CLIENT_SECRET: z.string(),
+    // DISCORD_CLIENT_ID: z
+    //   .string()
+    //   .min(1, { message: "Discord Client ID is invalid or missing" }),
+    // DISCORD_CLIENT_SECRET: z
+    //   .string()
+    //   .min(1, { message: "Discord Client Secret is invalid or missing" }),
 
     /* -----------------------------------------------------------------------------------------------
      * Database URL
      * -----------------------------------------------------------------------------------------------*/
 
-    DATABASE_URL: z.string(),
+    DATABASE_URL: z
+      .string()
+      .min(1, { message: "Database URL is invalid or missing" }),
 
     /* -----------------------------------------------------------------------------------------------
      * Upstash Rate Limiting (Redis)

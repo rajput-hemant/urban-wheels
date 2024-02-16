@@ -5,7 +5,7 @@ import type { ClassValue } from "clsx";
 import type { ReadonlyURLSearchParams } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
-import { env } from "@/lib/env.mjs";
+import { env } from "@/lib/env";
 
 /**
  * Merges the given class names with the tailwind classes

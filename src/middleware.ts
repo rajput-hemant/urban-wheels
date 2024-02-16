@@ -4,7 +4,7 @@ import { Redis } from "@upstash/redis";
 
 import type { NextRequest } from "next/server";
 
-import { env } from "./lib/env.mjs";
+import { env } from "./lib/env";
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),

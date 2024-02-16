@@ -1,7 +1,7 @@
 import { asc, eq, sql } from "drizzle-orm";
 
 import { db } from ".";
-import { env } from "../env.mjs";
+import { env } from "../env";
 import * as placeholder from "./placeholder";
 import { cars, locations, testimonials } from "./schema/tables";
 
