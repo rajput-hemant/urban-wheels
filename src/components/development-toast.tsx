@@ -1,8 +1,7 @@
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 export function currentlyInDeveltopmentToast() {
-  toast({
-    title: "Currently in development",
+  toast.info("Currently in development", {
     description: "This feature is currently in development.",
   });
 }

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addDays, differenceInDays, format, isAfter } from "date-fns";
 import { Check } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import type { Location } from "@/lib/db/definitions";
@@ -31,7 +32,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { toast } from "@/components/ui/use-toast";
 import { SearchParams } from "@/lib/enums";
 import { cn, formatCurrency } from "@/lib/utils";
 
@@ -65,10 +65,10 @@ export function ReservationForm({
 
   function onSubmit(values: z.infer<typeof FormSchema>) {
     const { checkin, checkout, location } = values;
-    toast({
-      title: "You submitted the following values:",
+    toast("You submitted the following values:", {
+      descriptionClassName: "mt-2 flex justify-center w-full",
       description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        <pre className="w-[320px] rounded-md bg-slate-950 p-4">
           <code className="text-white">
             {JSON.stringify(
               {

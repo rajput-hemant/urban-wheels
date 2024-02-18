@@ -6,7 +6,7 @@ import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer/footer";
 import { SiteHeader } from "@/components/site-header/navbar";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
 import { fontHeading, fontSans } from "@/lib/fonts";
 import { absoluteUrl, cn } from "@/lib/utils";
