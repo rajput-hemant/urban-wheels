@@ -84,7 +84,11 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
 
             <div className="-mt-16">
               <Suspense fallback={<SearchFormSkeleton compact />}>
-                <SearchForm locations={locations} compact />
+                <SearchForm
+                  locations={locations}
+                  compact
+                  className="transition-shadow duration-300 hover:shadow-md"
+                />
               </Suspense>
             </div>
 
@@ -121,7 +125,7 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
         </div>
 
         <div className="hidden flex-auto lg:block">
-          <div className="sticky top-[calc(8rem+1px)] mb-2 mr-2 flex min-h-[calc(100dvh-8.5rem)] overflow-hidden rounded-md border">
+          <div className="sticky top-[calc(10rem+1px)] my-2 mr-2 flex min-h-[calc(100dvh-8.5rem)] overflow-hidden rounded-md border">
             <MapContainer />
           </div>
         </div>

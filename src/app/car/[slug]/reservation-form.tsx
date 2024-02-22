@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDays, differenceInDays, format, isAfter } from "date-fns";
 import { Check } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import type { Location } from "@/lib/db/definitions";
@@ -33,7 +32,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { SearchParams } from "@/lib/enums";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, createUrl, formatCurrency } from "@/lib/utils";
 
 const FormSchema = z
   .object({
@@ -46,44 +45,62 @@ const FormSchema = z
     path: ["checkout"],
   });
 
+type FormData = z.infer<typeof FormSchema>;
+
 type ReservationFormProps = {
+  carSlug: string;
   locations: Location[];
   pricePerDay: number;
   currency: string;
 };
 
-export function ReservationForm({
-  locations,
-  pricePerDay,
-  currency,
-}: ReservationFormProps) {
+export function ReservationForm(props: ReservationFormProps) {
+  const { carSlug, locations, pricePerDay, currency } = props;
+
+  const router = useRouter();
   const searchParams = useSearchParams();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const [days, setDays] = React.useState<number>();
+  const [subtotal, setSubtotal] = React.useState<number>();
+  const [taxesAndFees, setTaxesAndFees] = React.useState<number>();
+
+  const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(values: z.infer<typeof FormSchema>) {
-    const { checkin, checkout, location } = values;
-    toast("You submitted the following values:", {
-      descriptionClassName: "mt-2 flex justify-center w-full",
-      description: (
-        <pre className="w-[320px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify(
-              {
-                location,
-                checkin: format(checkin, "LLL dd, y"),
-                checkout: format(checkout, "LLL dd, y"),
-              },
-              null,
-              2
-            )}
-          </code>
-        </pre>
-      ),
-    });
+  function onSubmit(values: FormData) {
+    const { location, checkin, checkout } = values;
+
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    newParams.set(SearchParams.CAR_SLUG, carSlug);
+    newParams.set(SearchParams.LOCATION, location);
+    newParams.set(SearchParams.CHECKIN, checkin.toISOString());
+    newParams.set(SearchParams.CHECKOUT, checkout.toISOString());
+
+    console.log({ location, checkin, checkout });
+    router.push(createUrl("/reservation", newParams));
   }
+
+  const calculateTotal = React.useCallback(() => {
+    const checkin = form.getValues("checkin");
+    const checkout = form.getValues("checkout");
+
+    if (checkin && checkout && isAfter(checkout, checkin)) {
+      const calculatedDays = differenceInDays(checkout, checkin);
+      const calculatedSubtotal = pricePerDay * calculatedDays;
+      const calculatedTaxesAndFees = calculatedSubtotal * 0.16;
+
+      setDays(calculatedDays);
+      setSubtotal(calculatedSubtotal);
+      setTaxesAndFees(calculatedTaxesAndFees);
+    } else {
+      // Reset values if either check-in or checkout is not set or if checkout is not after check-in
+      setDays(undefined);
+      setSubtotal(undefined);
+      setTaxesAndFees(undefined);
+    }
+  }, [form, pricePerDay]);
 
   React.useEffect(() => {
     const location = searchParams.get(SearchParams.LOCATION);
@@ -94,18 +111,26 @@ export function ReservationForm({
     if (checkin) form.setValue("checkin", new Date(checkin));
     if (checkout) form.setValue("checkout", new Date(checkout));
 
+    calculateTotal();
+
     return () => {
       form.resetField("location");
       form.resetField("checkin");
       form.resetField("checkout");
     };
-  }, [searchParams, form]);
+  }, [searchParams, form, calculateTotal]);
 
-  const checkIn = addDays(new Date(), 7);
-  const checkOut = addDays(new Date(), 14);
+  React.useEffect(() => {
+    const subscription = form.watch(({ checkin, checkout }) => {
+      if (checkin && checkout) {
+        calculateTotal();
+      }
+    });
 
-  const days = differenceInDays(checkOut, checkIn);
-  const taxesAndFees = pricePerDay * days * 0.16;
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [form, calculateTotal]);
 
   return (
     <>
@@ -269,22 +294,31 @@ export function ReservationForm({
       <div className="text-muted-foreground mt-4">
         <div className="flex items-center justify-between">
           <p>
-            {formatCurrency(pricePerDay, currency)} x {days}{" "}
-            {days > 1 ? "days" : "day"}
+            {formatCurrency(pricePerDay, currency)} x {days ? days : "—"}{" "}
+            {days ?
+              days > 1 ?
+                "days"
+              : "day"
+            : "days"}{" "}
           </p>
-          <p>{formatCurrency(pricePerDay * days, currency)}</p>
+          <p>{subtotal ? formatCurrency(subtotal, currency) : "—"}</p>
         </div>
 
         <div className="mt-1 flex items-center justify-between">
           <p>Taxes and fees</p>
-          <p>{formatCurrency(taxesAndFees, currency)}</p>
+          <p>{taxesAndFees ? formatCurrency(taxesAndFees, currency) : "—"}</p>
         </div>
 
         <hr className="my-4" />
 
         <div className="text-foreground flex items-center justify-between font-semibold">
           <p>Total (taxes included)</p>
-          <p>{formatCurrency(pricePerDay * days + taxesAndFees, currency)}</p>
+          <p>
+            {" "}
+            {subtotal && taxesAndFees ?
+              formatCurrency(subtotal + taxesAndFees, currency)
+            : "—"}
+          </p>
         </div>
       </div>
     </>

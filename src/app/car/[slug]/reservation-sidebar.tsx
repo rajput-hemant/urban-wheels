@@ -6,6 +6,7 @@ import { formatCurrency } from "@/lib/utils";
 import { ReservationForm } from "./reservation-form";
 
 type ReservationSidebarProps = {
+  carSlug: string;
   pricePerDay: number;
   currency: string;
   rating: string;
@@ -13,13 +14,9 @@ type ReservationSidebarProps = {
   locations: Location[];
 };
 
-export function ReservationSidebar({
-  pricePerDay,
-  currency,
-  rating,
-  reviews,
-  locations,
-}: ReservationSidebarProps) {
+export function ReservationSidebar(props: ReservationSidebarProps) {
+  const { carSlug, pricePerDay, currency, rating, reviews, locations } = props;
+
   return (
     <div className="hidden min-h-[calc(100vh-3rem)] normal-nums lg:block">
       <div className="sticky top-24 rounded-xl border p-6 shadow-[0_6px_16px_rgba(0,0,0,0.12)]">
@@ -47,6 +44,7 @@ export function ReservationSidebar({
         </div>
 
         <ReservationForm
+          carSlug={carSlug}
           locations={locations}
           pricePerDay={pricePerDay}
           currency={currency}
