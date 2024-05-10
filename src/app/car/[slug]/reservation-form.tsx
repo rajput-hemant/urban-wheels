@@ -43,7 +43,14 @@ const FormSchema = z
   .refine((schema) => isAfter(schema.checkout, schema.checkin), {
     message: "Check out must be after check in",
     path: ["checkout"],
-  });
+  })
+  .refine(
+    ({ checkin, checkout }) => differenceInDays(checkout, checkin) <= 30,
+    {
+      message: "Maximum 30 days allowed for booking",
+      path: ["checkout"],
+    }
+  );
 
 type FormData = z.infer<typeof FormSchema>;
 

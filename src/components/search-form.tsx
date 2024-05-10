@@ -3,7 +3,7 @@
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addDays, format, isAfter } from "date-fns";
+import { addDays, differenceInDays, format, isAfter } from "date-fns";
 import { Check, Search } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -45,7 +45,14 @@ const FormSchema = z
   .refine(({ checkin, checkout }) => isAfter(checkout, checkin), {
     message: "Check out must be after check in",
     path: ["checkout"],
-  });
+  })
+  .refine(
+    ({ checkin, checkout }) => differenceInDays(checkout, checkin) <= 30,
+    {
+      message: "Maximum 30 days allowed for booking",
+      path: ["checkout"],
+    }
+  );
 
 type SearchFormProps = React.HTMLAttributes<HTMLFormElement> & {
   locations: Location[];
@@ -60,6 +67,8 @@ export function SearchForm({
 }: SearchFormProps) {
   const { push } = useRouter();
   const searchParams = useSearchParams();
+
+  const [open, setOpen] = React.useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -127,7 +136,7 @@ export function SearchForm({
                   Pick-up / Drop-off
                 </FormLabel>
 
-                <Popover>
+                <Popover open={open} onOpenChange={setOpen}>
                   <PopoverTrigger asChild>
                     <FormControl>
                       <button
@@ -148,7 +157,6 @@ export function SearchForm({
                       </button>
                     </FormControl>
                   </PopoverTrigger>
-
                   <PopoverContent className="p-0">
                     <Command>
                       <CommandInput placeholder="Search location..." />
@@ -156,10 +164,11 @@ export function SearchForm({
                       <CommandGroup>
                         {locations.map(({ name, value }) => (
                           <CommandItem
-                            key={value}
-                            value={name}
-                            onSelect={() => {
-                              form.setValue("location", value);
+                            key={name}
+                            value={value}
+                            onSelect={(currentValue) => {
+                              form.setValue("location", currentValue);
+                              setOpen(false);
                             }}
                           >
                             <Check

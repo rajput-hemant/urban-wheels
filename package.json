@@ -20,6 +20,8 @@
     "db:studio": "drizzle-kit studio",
     "db:check": "drizzle-kit check:pg",
     "prepare": "husky",
+    "clean": "rm -rf .next",
+    "cleani": "rm -rf .next && rm -rf node_modules && bun i",
     "seed": "bun src/lib/db/seed.ts"
   },
   "dependencies": {
@@ -44,7 +46,7 @@
     "@upstash/redis": "^1.30.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cmdk": "^1.0.0",
+    "cmdk": "^0.2.1",
     "date-fns": "^3.6.0",
     "drizzle-orm": "^0.30.10",
     "geist": "^1.3.0",
