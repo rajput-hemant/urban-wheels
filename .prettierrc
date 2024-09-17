@@ -16,5 +16,6 @@
     "^[@~]/.*$",
     "^[.]"
   ],
-  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+  "experimentalTernaries": true
 }
