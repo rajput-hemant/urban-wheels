@@ -1,8 +1,5 @@
-import createJiti from "jiti";
-
 // This is validation for the environment variables early in the build process.
-const jiti = createJiti(new URL(import.meta.url).pathname);
-jiti("./src/lib/env");
+await import("./src/lib/env.js");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
