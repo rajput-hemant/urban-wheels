@@ -81,7 +81,7 @@
     "drizzle-kit": "^0.26.2",
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.16",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-tailwindcss": "^3.17.5",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
